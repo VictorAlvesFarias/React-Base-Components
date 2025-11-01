@@ -16,5 +16,4 @@ interface IModalController {
 }
 declare const ModalContext: React.ForwardRefExoticComponent<IModalContextComponent & React.RefAttributes<IModalController>>;
 declare const ModalContextObject: React.Context<IModalContextType>;
-export default ModalContext;
 export { ModalContextObject, ModalContext, IModalController };

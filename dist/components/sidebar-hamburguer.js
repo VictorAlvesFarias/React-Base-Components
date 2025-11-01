@@ -5,4 +5,4 @@ function SidebarHamburguerContainer(props) {
     const { setOpen, open } = useContext(SidebarContextObject);
     return (_jsx("div", { onClick: () => setOpen(!open), className: props.className, children: props.children }));
 }
-export default SidebarHamburguerContainer;
+export { SidebarHamburguerContainer };

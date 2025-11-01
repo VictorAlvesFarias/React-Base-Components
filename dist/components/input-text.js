@@ -95,4 +95,4 @@ const TextContainer = forwardRef((props, ref) => {
     }
     return (_jsx("div", { onClick: () => { var _a; return (_a = internalRef.current) === null || _a === void 0 ? void 0 : _a.focus(); }, className: props.className, "aria-disabled": props.disabled, "aria-atomic": props.loading, children: _jsx("input", { ...props, type: "text", className: "bg-transparent outline-none w-full h-full flex ", placeholder: propsRef.current.placeholder, ref: handleRef, onChange: handleOnChange }) }));
 });
-export default TextContainer;
+export { TextContainer };

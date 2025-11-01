@@ -12,5 +12,4 @@ const AccordionContextObject = createContext({
     open: false,
     setOpen: () => { }
 });
-export default AccordionContext;
-export { AccordionContextObject };
+export { AccordionContextObject, AccordionContext };

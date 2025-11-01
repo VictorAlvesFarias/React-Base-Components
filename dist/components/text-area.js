@@ -15,4 +15,4 @@ const TextAreaContainer = forwardRef((props, ref) => {
     }
     return (_jsx("div", { onClick: () => { var _a; return (_a = internalRef.current) === null || _a === void 0 ? void 0 : _a.focus(); }, className: props.className, "aria-disabled": props.disabled, "aria-atomic": props.loading, children: _jsx("textarea", { ...props, className: "bg-transparent outline-none w-full h-full resize-none", placeholder: props.placeholder, ref: handleRef, onChange: handleOnChange }) }));
 });
-export default TextAreaContainer;
+export { TextAreaContainer };

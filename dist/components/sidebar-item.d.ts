@@ -12,5 +12,4 @@ interface ISidebarItemContainerProps {
     commons?: string[];
 }
 declare function SidebarSidebarItemContainerContainer(props: ISidebarItemContainerProps): import("react/jsx-runtime").JSX.Element;
-export default SidebarSidebarItemContainerContainer;
-export { ISidebarItemContainerProps };
+export { ISidebarItemContainerProps, SidebarSidebarItemContainerContainer };

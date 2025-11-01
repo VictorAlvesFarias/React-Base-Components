@@ -12,4 +12,4 @@ function DropdownMenuContainer(props) {
     }, [started]);
     return (_jsx("div", { className: 'w-full flex flex-col ' + props.className, children: items.filter(e => e.props.label.toLowerCase().includes(filter.toLowerCase())).map(e => e) }));
 }
-export default DropdownMenuContainer;
+export { DropdownMenuContainer };

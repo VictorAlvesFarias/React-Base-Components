@@ -6,4 +6,4 @@ function AccordionDesactivateIcon(props) {
     return (!open &&
         _jsx(_Fragment, { children: props.children }));
 }
-export default AccordionDesactivateIcon;
+export { AccordionDesactivateIcon };

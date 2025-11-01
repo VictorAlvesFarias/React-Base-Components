@@ -9,5 +9,4 @@ interface IDropdownOptionContainerProps {
     defaultValue?: boolean;
 }
 declare function DropdownOptionContainer(props: IDropdownOptionContainerProps): import("react/jsx-runtime").JSX.Element;
-export default DropdownOptionContainer;
-export { IDropdownOptionValue, IDropdownOptionContainerProps };
+export { IDropdownOptionValue, IDropdownOptionContainerProps, DropdownOptionContainer };

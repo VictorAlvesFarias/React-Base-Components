@@ -6,5 +6,4 @@ interface IAccordionTitleContainerProps {
     onClick?: (e: any) => any;
 }
 declare const AccordionTitleContainer: React.ForwardRefExoticComponent<Omit<IAccordionTitleContainerProps, "ref"> & React.RefAttributes<any>>;
-export default AccordionTitleContainer;
-export { IAccordionTitleContainerProps };
+export { IAccordionTitleContainerProps, AccordionTitleContainer };

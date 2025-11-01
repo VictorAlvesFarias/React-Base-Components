@@ -10,5 +10,4 @@ interface ISiderbarContextComponent {
 }
 declare const SidebarContextObject: React.Context<ISidebarContext>;
 declare function SidebarContext(props: ISiderbarContextComponent): import("react/jsx-runtime").JSX.Element;
-export default SidebarContext;
-export { SidebarContextObject, ISidebarContext, ISiderbarContextComponent };
+export { SidebarContextObject, ISidebarContext, ISiderbarContextComponent, SidebarContext };

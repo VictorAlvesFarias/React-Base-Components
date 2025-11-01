@@ -9,4 +9,4 @@ const AccordionTitleContainer = forwardRef((_, ref) => {
     }
     return (_jsx("div", { ref: ref, className: _.className, onClick: handleOpenAccordionTitle, children: _.children }));
 });
-export default AccordionTitleContainer;
+export { AccordionTitleContainer };

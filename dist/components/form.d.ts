@@ -6,5 +6,4 @@ interface IFormContainerProps {
     id?: string;
 }
 declare const FormContainer: React.ForwardRefExoticComponent<IFormContainerProps & React.RefAttributes<HTMLFormElement>>;
-export default FormContainer;
-export { IFormContainerProps };
+export { IFormContainerProps, FormContainer };

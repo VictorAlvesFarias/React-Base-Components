@@ -21,4 +21,4 @@ function DropdownOptionContainer(props) {
     }, []);
     return (_jsx("span", { onClick: handleSetOption, className: props.className, children: props.label }));
 }
-export default DropdownOptionContainer;
+export { DropdownOptionContainer };
