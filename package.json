@@ -1,0 +1,17 @@
+{
+  "name": "my-lib",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "^19.2.0"
+  }
+}

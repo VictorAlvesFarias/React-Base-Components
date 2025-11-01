@@ -1,0 +1,106 @@
+import { LegacyRef, Ref, forwardRef, useContext, useEffect, useRef, useState } from "react"
+import { DropdownContextObject } from "./dropdown-context"
+import { IDropdownMenuContainerProps } from "./dropdown-menu"
+import React from "react"
+
+interface IDropdownRootContainerProps {
+    readonly?: boolean
+    disabled?: boolean
+    name?: string
+    onChange?: (e: any) => any
+    onBlur?: (e: any) => any
+    ref?: any,
+    value?: any
+    children: React.ReactElement<IDropdownMenuContainerProps>
+    className?: string
+    placeholder?: string
+};
+
+const DropdownRootContainer = forwardRef((props: IDropdownRootContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
+    const { open, setOpen, selected, setSelected, filter, setFilter, setStarted, options } = useContext(DropdownContextObject)
+    const internalRef = useRef<HTMLInputElement | null>(null)
+    const helperInputRef = useRef<HTMLInputElement | null>(null)
+    const inputProps = { ...props, children: null }
+
+    function handleRef(element: HTMLInputElement | null) {
+        if (ref instanceof Function) {
+            ref(element);
+        }
+
+        internalRef.current = element;
+    };
+    function handleOnChangeFilter(e: React.ChangeEvent<HTMLInputElement>) {
+        setSelected(null)
+        setFilter(e.target.value)
+
+        if (internalRef.current?.value) {
+            internalRef.current.value = ""
+
+            if (ref instanceof Function) {
+                ref(internalRef.current);
+            }
+        };
+    }
+    function onClick() {
+        setOpen(true)
+
+        helperInputRef.current?.focus()
+    }
+
+    useEffect(() => {
+        setStarted(inputProps.value)
+    }, [])
+
+    useEffect(() => {
+        let option = options.find(e => e.value == internalRef?.current?.value)
+
+        if (option == null) {
+            setSelected(null)
+
+            return
+        }
+
+        setSelected({ label: option?.label ?? "", value: option?.value })
+    }, [internalRef.current?.value])
+
+    return (
+        <>
+            <div className='w-full relative'>
+                <div aria-disabled={props.disabled} className={props.className + " z-[9] relative"} onClick={props.disabled ? () => null : onClick} >
+                    <input
+                        ref={helperInputRef}
+                        className="bg-transparent outline-none w-full "
+                        type="text"
+                        disabled={props.disabled}
+                        onChange={handleOnChangeFilter}
+                        value={selected?.label ? selected.label : filter}
+                        placeholder={props.placeholder}
+                    />
+                    <input
+                        {...inputProps}
+                        aria-hidden={props.value && props.value != "" ? true : false}
+                        className='bg-transparent outline-none w-0'
+                        disabled={props.disabled}
+                        value={inputProps.value || ''}
+                        ref={handleRef}
+                        onChange={(e) => {
+                            e.target.value
+                            props?.onChange ? props.onChange(e) : null
+                        }}
+                    />
+                </div>
+                <div aria-hidden={!open} className={'absolute w-full h-full aria-hidden:hidden z-[12] '}>
+                    {props.children}
+                </div>
+            </div>
+            <div aria-hidden={!open} onClick={() => setOpen(!open)} className='z-[10] fixed w-full top-0 left-0 h-full aria-hidden:hidden'>
+            </div>
+        </>
+    )
+})
+
+export default DropdownRootContainer
+
+export {
+    IDropdownRootContainerProps
+}
