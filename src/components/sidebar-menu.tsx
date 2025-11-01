@@ -30,8 +30,7 @@ function MenuContainer(props: IMenuContainerProps) {
     )
 }
 
-export default MenuContainer
-
 export {
-    IMenuContainerProps
+    IMenuContainerProps,
+    MenuContainer
 }

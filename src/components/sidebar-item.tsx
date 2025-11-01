@@ -72,8 +72,7 @@ function SidebarSidebarItemContainerContainer(props: ISidebarItemContainerProps)
     )
 }
 
-export default SidebarSidebarItemContainerContainer
-
 export {
-    ISidebarItemContainerProps
+    ISidebarItemContainerProps,
+    SidebarSidebarItemContainerContainer
 }

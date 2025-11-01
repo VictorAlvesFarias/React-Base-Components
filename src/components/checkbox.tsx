@@ -64,8 +64,7 @@ const CheckboxContainer = forwardRef((props: ICheckboxContainerProps, ref: Ref<H
     )
 })
 
-export default CheckboxContainer
-
 export {
-    ICheckboxContainerProps
+    ICheckboxContainerProps,
+    CheckboxContainer
 }

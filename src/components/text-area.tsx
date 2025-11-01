@@ -49,8 +49,7 @@ const TextAreaContainer = forwardRef((props: ITextAreaContainerProps, ref: Ref<H
     );
 });
 
-export default TextAreaContainer;
-
 export {
-    ITextAreaContainerProps
+    ITextAreaContainerProps,
+    TextAreaContainer
 }

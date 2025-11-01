@@ -30,8 +30,7 @@ const FormContainer = forwardRef((props: IFormContainerProps, ref:  Ref<HTMLForm
     )
 })
 
-export default FormContainer
-
 export {
-    IFormContainerProps
+    IFormContainerProps,
+    FormContainer
 }

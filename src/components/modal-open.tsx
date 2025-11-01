@@ -23,8 +23,7 @@ function ModalOpen(_: IModalOpenProps) {
     )
 }
 
-export default ModalOpen
-
 export {
-    IModalOpenProps
+    IModalOpenProps,
+    ModalOpen
 }

@@ -41,5 +41,7 @@ const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>(
     )
 })
 
-export default AccordionContainer
-export { IAccordionContainerProps }
+export { 
+    IAccordionContainerProps,
+    AccordionContainer
+}

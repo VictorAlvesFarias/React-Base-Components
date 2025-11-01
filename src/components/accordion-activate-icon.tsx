@@ -16,8 +16,7 @@ function AccordionActivateIcon(props: IAccordionActivateIconProps) {
     )
 }
 
-export default AccordionActivateIcon
-
 export {
-    IAccordionActivateIconProps
+    IAccordionActivateIconProps,
+    AccordionActivateIcon
 }

@@ -43,9 +43,8 @@ function DropdownOptionContainer(props: IDropdownOptionContainerProps) {
     )
 }
 
-export default DropdownOptionContainer
-
 export {
     IDropdownOptionValue,
-    IDropdownOptionContainerProps
+    IDropdownOptionContainerProps,
+    DropdownOptionContainer
 }

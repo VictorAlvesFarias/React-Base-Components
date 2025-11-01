@@ -146,8 +146,7 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
     )
 })
 
-export default TextContainer
-
 export {
-    ITextContainerProps
+    ITextContainerProps,
+    TextContainer
 }

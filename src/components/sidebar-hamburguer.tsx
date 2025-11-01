@@ -16,8 +16,7 @@ function SidebarHamburguerContainer(props: SidebarHamburguerContainerProps) {
     )
 }
 
-export default SidebarHamburguerContainer
-
 export {
-    SidebarHamburguerContainerProps
+    SidebarHamburguerContainerProps,
+    SidebarHamburguerContainer
 }

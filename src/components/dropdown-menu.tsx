@@ -27,8 +27,7 @@ function DropdownMenuContainer(props: IDropdownMenuContainerProps) {
     )
 }
 
-export default DropdownMenuContainer
-
 export {
-    IDropdownMenuContainerProps
+    IDropdownMenuContainerProps,
+    DropdownMenuContainer
 }

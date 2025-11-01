@@ -14,4 +14,6 @@ function If(props: IIfProps) {
     )
 }
 
-export default If
+export {
+    If
+}

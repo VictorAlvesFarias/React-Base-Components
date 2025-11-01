@@ -16,8 +16,7 @@ function AccordionDesactivateIcon(props: IAccordionDesactivateIconProps) {
     )
 }
 
-export default AccordionDesactivateIcon
-
 export {
-    IAccordionDesactivateIconProps
+    IAccordionDesactivateIconProps,
+    AccordionDesactivateIcon
 }

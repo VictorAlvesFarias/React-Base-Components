@@ -99,8 +99,7 @@ const DropdownRootContainer = forwardRef((props: IDropdownRootContainerProps, re
     )
 })
 
-export default DropdownRootContainer
-
 export {
-    IDropdownRootContainerProps
+    IDropdownRootContainerProps,
+    DropdownRootContainer
 }

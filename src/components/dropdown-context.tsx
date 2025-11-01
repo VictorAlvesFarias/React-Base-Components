@@ -65,8 +65,7 @@ const DropdownContextObject = createContext<DropdownContextType>({
     options: []
 });
 
-export default DropdownContext
-
 export {
-    DropdownContextObject
+    DropdownContextObject,
+    DropdownContext
 }

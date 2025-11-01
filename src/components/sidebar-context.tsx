@@ -30,10 +30,9 @@ function SidebarContext(props: ISiderbarContextComponent) {
     return <SidebarContextObject.Provider value={context} children={props.children} />
 }
 
-export default SidebarContext
-
 export {
     SidebarContextObject,
     ISidebarContext,
-    ISiderbarContextComponent
+    ISiderbarContextComponent,
+    SidebarContext
 }

@@ -27,8 +27,7 @@ const AccordionTitleContainer = forwardRef<LegacyRef<HTMLDivElement> | any, IAcc
     );
 })
 
-export default AccordionTitleContainer
-
 export {
-    IAccordionTitleContainerProps
+    IAccordionTitleContainerProps,
+    AccordionTitleContainer
 }

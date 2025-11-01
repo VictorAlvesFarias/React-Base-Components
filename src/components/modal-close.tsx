@@ -24,8 +24,7 @@ function ModalClose(props: IModalCloseProps) {
     )
 }
 
-export default ModalClose
-
 export {
-    IModalCloseProps
+    IModalCloseProps,
+    ModalClose
 }

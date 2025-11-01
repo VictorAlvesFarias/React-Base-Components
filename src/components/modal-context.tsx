@@ -44,8 +44,6 @@ const ModalContextObject = createContext<IModalContextType>({
     setOpen: () => { }
 });
 
-export default ModalContext
-
 export {
     ModalContextObject,
     ModalContext,

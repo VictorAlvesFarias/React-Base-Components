@@ -28,8 +28,7 @@ const ButtonContainer = forwardRef<LegacyRef<HTMLButtonElement> | any, IButtonCo
   );
 })
 
-export default ButtonContainer
-
 export {
-  IButtonContainerProps
+  IButtonContainerProps,
+  ButtonContainer
 }

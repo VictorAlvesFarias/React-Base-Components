@@ -24,9 +24,8 @@ const AccordionContextObject = createContext<IAccordionContext>({
     setOpen: () => { }
 });
 
-export default AccordionContext
-
 export {
     AccordionContextObject,
-    IAccordionContextComponent
+    IAccordionContextComponent,
+    AccordionContext
 }

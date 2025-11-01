@@ -18,8 +18,7 @@ function ModalRootContainer(_: IModalRootContainerProps) {
     )
 }
 
-export default ModalRootContainer
-
 export {
-    IModalRootContainerProps
+    IModalRootContainerProps,
+    ModalRootContainer
 }
