@@ -22,4 +22,4 @@ const AccordionContainer = forwardRef((props, ref) => {
     }, [open, props.children]);
     return (_jsx("div", { ref: ref, className: `overflow-hidden transition-all duration-300 ${props.className || ''}`, style: { maxHeight: height }, onClick: props.onClick, children: _jsx("div", { ref: innerRef, className: "flex flex-col gap-3 py-3", children: props.children }) }));
 });
-export default AccordionContainer;
+export { AccordionContainer };

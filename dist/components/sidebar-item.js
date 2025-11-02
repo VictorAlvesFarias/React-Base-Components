@@ -37,4 +37,4 @@ function SidebarSidebarItemContainerContainer(props) {
         _jsx("div", { onClick: handleOnCLick, "aria-selected": handleIsSelected(), "aria-checked": open, className: props.className, children: props.children }) :
         _jsx("div", { "aria-selected": handleIsSelected(), onClick: props.onClick, "aria-checked": open && props.menu == true, className: props.className, children: props.children }));
 }
-export default SidebarSidebarItemContainerContainer;
+export { SidebarSidebarItemContainerContainer };

@@ -13,5 +13,4 @@ interface ICheckboxContainerProps {
     data: any;
 }
 declare const CheckboxContainer: React.ForwardRefExoticComponent<Omit<ICheckboxContainerProps, "ref"> & React.RefAttributes<HTMLInputElement>>;
-export default CheckboxContainer;
-export { ICheckboxContainerProps };
+export { ICheckboxContainerProps, CheckboxContainer };

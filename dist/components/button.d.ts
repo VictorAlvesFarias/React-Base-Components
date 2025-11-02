@@ -11,5 +11,4 @@ interface IButtonContainerProps {
     form?: string;
 }
 declare const ButtonContainer: React.ForwardRefExoticComponent<Omit<IButtonContainerProps, "ref"> & React.RefAttributes<any>>;
-export default ButtonContainer;
-export { IButtonContainerProps };
+export { IButtonContainerProps, ButtonContainer };

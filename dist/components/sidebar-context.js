@@ -16,5 +16,4 @@ function SidebarContext(props) {
     };
     return _jsx(SidebarContextObject.Provider, { value: context, children: props.children });
 }
-export default SidebarContext;
-export { SidebarContextObject };
+export { SidebarContextObject, SidebarContext };

@@ -49,4 +49,4 @@ const DropdownRootContainer = forwardRef((props, ref) => {
                                     (props === null || props === void 0 ? void 0 : props.onChange) ? props.onChange(e) : null;
                                 } })] }), _jsx("div", { "aria-hidden": !open, className: 'absolute w-full h-full aria-hidden:hidden z-[12] ', children: props.children })] }), _jsx("div", { "aria-hidden": !open, onClick: () => setOpen(!open), className: 'z-[10] fixed w-full top-0 left-0 h-full aria-hidden:hidden' })] }));
 });
-export default DropdownRootContainer;
+export { DropdownRootContainer };

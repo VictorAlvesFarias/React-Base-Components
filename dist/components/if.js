@@ -3,4 +3,4 @@ function If(props) {
     return (props.conditional &&
         _jsx(_Fragment, { children: props.children }));
 }
-export default If;
+export { If };

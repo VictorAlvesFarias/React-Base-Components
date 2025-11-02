@@ -20,5 +20,4 @@ const ModalContextObject = createContext({
     open: false,
     setOpen: () => { }
 });
-export default ModalContext;
 export { ModalContextObject, ModalContext };

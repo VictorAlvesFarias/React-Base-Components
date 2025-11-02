@@ -13,5 +13,4 @@ interface IDropdownRootContainerProps {
     placeholder?: string;
 }
 declare const DropdownRootContainer: React.ForwardRefExoticComponent<Omit<IDropdownRootContainerProps, "ref"> & React.RefAttributes<HTMLInputElement>>;
-export default DropdownRootContainer;
-export { IDropdownRootContainerProps };
+export { IDropdownRootContainerProps, DropdownRootContainer };

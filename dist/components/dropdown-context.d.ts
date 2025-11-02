@@ -18,5 +18,4 @@ interface DropdownContextComponent {
 }
 declare function DropdownContext(props: DropdownContextComponent): import("react/jsx-runtime").JSX.Element;
 declare const DropdownContextObject: React.Context<DropdownContextType>;
-export default DropdownContext;
-export { DropdownContextObject };
+export { DropdownContextObject, DropdownContext };

@@ -6,4 +6,4 @@ function AccordionActivateIcon(props) {
     return (open &&
         _jsx(_Fragment, { children: props.children }));
 }
-export default AccordionActivateIcon;
+export { AccordionActivateIcon };

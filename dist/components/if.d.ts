@@ -4,4 +4,4 @@ interface IIfProps {
     children: React.ReactNode;
 }
 declare function If(props: IIfProps): false | import("react/jsx-runtime").JSX.Element | null | undefined;
-export default If;
+export { If };

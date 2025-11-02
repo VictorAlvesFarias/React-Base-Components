@@ -9,4 +9,4 @@ function ModalClose(props) {
     }
     return (_jsx("div", { onClick: handleOpen, className: props.className, children: props.children }));
 }
-export default ModalClose;
+export { ModalClose };

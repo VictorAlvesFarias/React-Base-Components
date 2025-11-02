@@ -7,5 +7,4 @@ interface IAccordionContextComponent {
 }
 declare function AccordionContext(props: IAccordionContextComponent): import("react/jsx-runtime").JSX.Element;
 declare const AccordionContextObject: import("react").Context<IAccordionContext>;
-export default AccordionContext;
-export { AccordionContextObject, IAccordionContextComponent };
+export { AccordionContextObject, IAccordionContextComponent, AccordionContext };

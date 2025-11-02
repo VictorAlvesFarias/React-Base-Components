@@ -17,4 +17,4 @@ const FormContainer = forwardRef((props, ref) => {
     }
     return (_jsx("form", { ref: handleRef, id: props.id, className: props.className, onSubmit: handleOnSubmit, children: props.children }));
 });
-export default FormContainer;
+export { FormContainer };

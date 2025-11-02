@@ -5,5 +5,4 @@ interface IModalRootContainerProps {
     children: React.ReactNode;
 }
 declare function ModalRootContainer(_: IModalRootContainerProps): false | import("react/jsx-runtime").JSX.Element;
-export default ModalRootContainer;
-export { IModalRootContainerProps };
+export { IModalRootContainerProps, ModalRootContainer };

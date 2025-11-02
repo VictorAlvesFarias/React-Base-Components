@@ -35,4 +35,4 @@ const CheckboxContainer = forwardRef((props, ref) => {
     }, [props.value]);
     return (_jsxs("label", { "aria-checked": checked, className: props.className, children: [_jsx("input", { ...props, children: null, className: 'hidden', ref: handleRef, onClick: handleOnChange }), checked && props.children] }));
 });
-export default CheckboxContainer;
+export { CheckboxContainer };

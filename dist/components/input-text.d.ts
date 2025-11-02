@@ -16,5 +16,4 @@ interface ITextContainerProps {
     debug?: boolean;
 }
 declare const TextContainer: React.ForwardRefExoticComponent<Omit<ITextContainerProps, "ref"> & React.RefAttributes<HTMLInputElement>>;
-export default TextContainer;
-export { ITextContainerProps };
+export { ITextContainerProps, TextContainer };

@@ -4,5 +4,4 @@ interface SidebarHamburguerContainerProps {
     children: React.ReactNode;
 }
 declare function SidebarHamburguerContainer(props: SidebarHamburguerContainerProps): import("react/jsx-runtime").JSX.Element;
-export default SidebarHamburguerContainer;
-export { SidebarHamburguerContainerProps };
+export { SidebarHamburguerContainerProps, SidebarHamburguerContainer };

@@ -9,4 +9,4 @@ function ModalOpen(_) {
     }
     return (_jsx("div", { onClick: handleOpen, className: _.className, children: _.children }));
 }
-export default ModalOpen;
+export { ModalOpen };

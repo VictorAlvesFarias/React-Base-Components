@@ -6,5 +6,4 @@ interface IDropdownMenuContainerProps {
     className: string;
 }
 declare function DropdownMenuContainer(props: IDropdownMenuContainerProps): import("react/jsx-runtime").JSX.Element;
-export default DropdownMenuContainer;
-export { IDropdownMenuContainerProps };
+export { IDropdownMenuContainerProps, DropdownMenuContainer };

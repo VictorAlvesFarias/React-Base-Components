@@ -6,5 +6,4 @@ interface IModalCloseProps {
     children?: React.ReactNode;
 }
 declare function ModalClose(props: IModalCloseProps): import("react/jsx-runtime").JSX.Element;
-export default ModalClose;
-export { IModalCloseProps };
+export { IModalCloseProps, ModalClose };

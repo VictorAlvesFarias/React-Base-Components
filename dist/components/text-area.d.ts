@@ -14,5 +14,4 @@ interface ITextAreaContainerProps {
     loading?: boolean;
 }
 declare const TextAreaContainer: React.ForwardRefExoticComponent<Omit<ITextAreaContainerProps, "ref"> & React.RefAttributes<HTMLTextAreaElement>>;
-export default TextAreaContainer;
-export { ITextAreaContainerProps };
+export { ITextAreaContainerProps, TextAreaContainer };

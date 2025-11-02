@@ -5,5 +5,4 @@ interface IModalOpenProps {
     children?: React.ReactNode[] | React.ReactNode;
 }
 declare function ModalOpen(_: IModalOpenProps): import("react/jsx-runtime").JSX.Element;
-export default ModalOpen;
-export { IModalOpenProps };
+export { IModalOpenProps, ModalOpen };
