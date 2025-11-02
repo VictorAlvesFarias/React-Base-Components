@@ -7,18 +7,18 @@
     "dist"
   ],
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css ",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --content=\"./src/**/*.{ts,tsx}\"",
     "build": "tsc && npm run build:css"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.16",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "tailwindcss": "^4.1.16",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.16",
     "react": "^19.2.0"
   },
   "exports": {
