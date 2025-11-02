@@ -22,3 +22,4 @@ export * from './components/sidebar-context';
 export * from './components/sidebar-hamburguer';
 export * from './components/sidebar-item';
 export * from './components/sidebar-menu';
+import './styles.css';
