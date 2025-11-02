@@ -1,5 +1,5 @@
 export default {
-  content: ["./src/**/*.{ts,tsx,js,jsx}"], // o Tailwind precisa ver as classes do @apply
+  content: ["./src/**/*.{ts,tsx,js,jsx}"], 
   theme: {
     extend: {},
   },

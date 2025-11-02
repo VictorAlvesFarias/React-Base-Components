@@ -7,16 +7,13 @@
     "dist"
   ],
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify --no-watch",
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css ",
     "build": "tsc && npm run build:css"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.16",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.0.0"
   },
