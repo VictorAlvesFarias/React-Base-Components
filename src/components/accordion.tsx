@@ -7,7 +7,7 @@ interface IAccordionContainerProps {
     onClick?: (e: any) => any
 }
 
-const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>((props, ref) => {
+const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>((props, ref: any) => {
     const { open } = useContext(AccordionContextObject)
     const innerRef = useRef<HTMLDivElement>(null)
     const [height, setHeight] = useState('0px')

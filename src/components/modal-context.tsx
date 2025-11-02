@@ -19,7 +19,7 @@ interface IModalController {
     isOpen: () => boolean
 }
 
-const ModalContext = forwardRef<IModalController, IModalContextComponent>((props, ref) => {
+const ModalContext = forwardRef<IModalController, IModalContextComponent>((props, ref: any) => {
     const [open, setOpen] = useStateReact<boolean>(props.initialOpen || false)
 
     useImperativeHandle(ref, () => ({
