@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify --no-watch",
     "build": "tsc && npm run build:css"
   },
   "devDependencies": {
