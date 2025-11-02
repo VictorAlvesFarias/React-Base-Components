@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "build:css": "npx postcss src/styles.css -o dist/styles.css --env production",
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
     "build": "tsc && npm run build:css"
   },
   "devDependencies": {
