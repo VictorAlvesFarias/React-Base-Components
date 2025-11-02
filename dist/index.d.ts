@@ -1,3 +1,4 @@
+import "./styles.css";
 export * from './components/accordion';
 export * from './components/accordion-activate-icon';
 export * from './components/accordion-context';
