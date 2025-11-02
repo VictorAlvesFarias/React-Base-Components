@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./src/styles/tailwind.css -o ./dist/styles.css",
+    "build:css": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css",
     "build": "tsc && npm run build:css"
   },
   "devDependencies": {
