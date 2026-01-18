@@ -1,8 +1,5 @@
 import React from 'react';
-interface IAccordionContainerProps {
-    children: React.ReactNode;
-    className?: string;
-    onClick?: (e: any) => any;
+interface IAccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare const AccordionContainer: React.ForwardRefExoticComponent<IAccordionContainerProps & React.RefAttributes<HTMLDivElement>>;
 export { IAccordionContainerProps, AccordionContainer };

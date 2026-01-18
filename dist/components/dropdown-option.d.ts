@@ -2,10 +2,9 @@ interface IDropdownOptionValue {
     value: any;
     label: string;
 }
-interface IDropdownOptionContainerProps {
+interface IDropdownOptionContainerProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'defaultValue'> {
     value: any;
     label: string;
-    className?: string;
     defaultValue?: boolean;
 }
 declare function DropdownOptionContainer(props: IDropdownOptionContainerProps): import("react/jsx-runtime").JSX.Element;

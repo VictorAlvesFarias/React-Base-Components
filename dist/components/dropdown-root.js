@@ -33,7 +33,8 @@ const DropdownRootContainer = forwardRef((props, ref) => {
         (_a = helperInputRef.current) === null || _a === void 0 ? void 0 : _a.focus();
     }
     useEffect(() => {
-        setStarted(inputProps.value);
+        var _a, _b;
+        setStarted((_b = (_a = inputProps.value) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : "");
     }, []);
     useEffect(() => {
         var _a;

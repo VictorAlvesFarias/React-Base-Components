@@ -31,7 +31,8 @@ const CheckboxContainer = forwardRef((props, ref) => {
         setChecked(((_a = internalRef.current) === null || _a === void 0 ? void 0 : _a.value) == "true");
     }, [(_a = internalRef.current) === null || _a === void 0 ? void 0 : _a.value]);
     useEffect(() => {
-        setChecked(props.value);
+        var _a;
+        setChecked(((_a = props.value) === null || _a === void 0 ? void 0 : _a.toString()) == "true");
     }, [props.value]);
     return (_jsxs("label", { "aria-checked": checked, className: props.className, children: [_jsx("input", { ...props, children: null, className: 'hidden', ref: handleRef, onClick: handleOnChange }), checked && props.children] }));
 });

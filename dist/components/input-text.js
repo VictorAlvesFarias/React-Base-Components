@@ -7,15 +7,19 @@ const TextContainer = forwardRef((props, ref) => {
     function parseCustomDate(dateStr, format) {
         var _a;
         const formatRegex = /^(dd|mm|yyyy)([\/\-\.])(dd|mm|yyyy)\2(dd|mm|yyyy)$/;
-        if (!formatRegex.test(format))
+        if (!formatRegex.test(format)) {
             return null;
+        }
         const separator = (_a = format.match(/[^a-zA-Z]/)) === null || _a === void 0 ? void 0 : _a[0];
-        if (!separator)
+        if (!separator) {
             return null;
+        }
+        ;
         const formatParts = format.split(separator);
         const dateParts = dateStr.split(separator);
-        if (formatParts.length !== 3 || dateParts.length !== 3)
+        if (formatParts.length !== 3 || dateParts.length !== 3) {
             return null;
+        }
         const map = {};
         formatParts.forEach((part, idx) => {
             map[part] = dateParts[idx];
@@ -23,12 +27,14 @@ const TextContainer = forwardRef((props, ref) => {
         const yyyy = map['yyyy'];
         const mm = map['mm'];
         const dd = map['dd'];
-        if (!yyyy || !mm || !dd)
+        if (!yyyy || !mm || !dd) {
             return null;
+        }
         const isoString = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
         const date = new Date(isoString);
-        if (isNaN(date.getTime()))
+        if (isNaN(date.getTime())) {
             return null;
+        }
         return date;
     }
     function formatMask(initialValue, regex, replacement) {

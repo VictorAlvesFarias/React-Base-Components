@@ -1,8 +1,6 @@
 import React from 'react';
-interface IModalOpenProps {
+interface IModalOpenProps extends React.HTMLAttributes<HTMLDivElement> {
     callback?: (e: any) => any;
-    className?: string;
-    children?: React.ReactNode[] | React.ReactNode;
 }
 declare function ModalOpen(_: IModalOpenProps): import("react/jsx-runtime").JSX.Element;
 export { IModalOpenProps, ModalOpen };

@@ -1,7 +1,5 @@
 import React from "react";
-interface SidebarHamburguerContainerProps {
-    className: string;
-    children: React.ReactNode;
+interface SidebarHamburguerContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 declare function SidebarHamburguerContainer(props: SidebarHamburguerContainerProps): import("react/jsx-runtime").JSX.Element;
 export { SidebarHamburguerContainerProps, SidebarHamburguerContainer };

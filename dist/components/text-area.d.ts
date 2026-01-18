@@ -1,17 +1,7 @@
 import React from "react";
-interface ITextAreaContainerProps {
-    readonly?: boolean;
-    disabled?: boolean;
-    name?: string;
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => any;
-    onBlur?: (e: any) => any;
-    ref?: any;
-    value?: any;
-    className: string;
-    placeholder?: string;
+interface ITextAreaContainerProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     mask?: [RegExp, string];
-    type?: string;
     loading?: boolean;
 }
-declare const TextAreaContainer: React.ForwardRefExoticComponent<Omit<ITextAreaContainerProps, "ref"> & React.RefAttributes<HTMLTextAreaElement>>;
+declare const TextAreaContainer: React.ForwardRefExoticComponent<ITextAreaContainerProps & React.RefAttributes<HTMLTextAreaElement>>;
 export { ITextAreaContainerProps, TextAreaContainer };
