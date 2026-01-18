@@ -1,16 +1,7 @@
 import React, { LegacyRef, Ref, forwardRef, useEffect, useRef, useState } from "react"
 
-interface ICheckboxContainerProps {
-    readonly?: boolean
-    disabled?: boolean
-    name?: string
+interface ICheckboxContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onChange?: (e: any, i?: any) => any
-    onBlur?: (e: any) => any
-    ref?: any,
-    value?: any
-    checked?: boolean
-    className?: string
-    children: React.ReactNode
     data: any
 }
 

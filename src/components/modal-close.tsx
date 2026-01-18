@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ModalContextObject } from './modal-context'
 
-interface IModalCloseProps {
-    open?: boolean,
+interface IModalCloseProps extends React.HTMLAttributes<HTMLDivElement> {
+    open?: boolean
     callback?: (e: any) => any
-    className?: string,
-    children?: React.ReactNode
 }
 
 function ModalClose(props: IModalCloseProps) {

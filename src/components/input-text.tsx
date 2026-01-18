@@ -1,18 +1,8 @@
 import React, { LegacyRef, Ref, forwardRef, useEffect } from "react"
 import { useRef } from "react"
 
-interface ITextContainerProps {
-    readonly?: boolean
-    disabled?: boolean
-    name?: string
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => any
-    onBlur?: (e: any) => any
-    ref?: any,
-    value?: any
-    className: string
-    placeholder?: string
+interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     mask?: [RegExp, string]
-    type?: string
     date?: string
     loading?: boolean
     debug?: boolean
@@ -24,16 +14,26 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
 
     function parseCustomDate(dateStr: string, format: string): Date | null {
         const formatRegex = /^(dd|mm|yyyy)([\/\-\.])(dd|mm|yyyy)\2(dd|mm|yyyy)$/;
-        if (!formatRegex.test(format)) return null;
+
+        if (!formatRegex.test(format)) {
+            return null;
+        }
 
         const separator = format.match(/[^a-zA-Z]/)?.[0];
-        if (!separator) return null;
+
+        if (!separator) {
+            return null
+        };
 
         const formatParts = format.split(separator);
         const dateParts = dateStr.split(separator);
-        if (formatParts.length !== 3 || dateParts.length !== 3) return null;
+
+        if (formatParts.length !== 3 || dateParts.length !== 3) {
+            return null;
+        }
 
         const map: { [key: string]: string } = {};
+
         formatParts.forEach((part, idx) => {
             map[part] = dateParts[idx];
         });
@@ -42,12 +42,16 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
         const mm = map['mm'];
         const dd = map['dd'];
 
-        if (!yyyy || !mm || !dd) return null;
+        if (!yyyy || !mm || !dd) {
+            return null;
+        }
 
         const isoString = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
         const date = new Date(isoString);
 
-        if (isNaN(date.getTime())) return null;
+        if (isNaN(date.getTime())) {
+            return null
+        }
 
         return date;
     }
@@ -84,7 +88,8 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
             }
 
             return format.replace(/dd|mm|yyyy/gi, matched => map[matched])
-        } catch (error) {
+        }
+        catch (error) {
             console.error("Value date is invalid or date format is missing.")
 
             return ""

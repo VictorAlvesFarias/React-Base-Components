@@ -1,9 +1,6 @@
 import React, { FormEvent, forwardRef, LegacyRef, Ref, useRef } from 'react'
-interface IFormContainerProps {
-    className: string
+interface IFormContainerProps extends React.FormHTMLAttributes<HTMLFormElement> {
     onSubmit: (e: any) => any
-    children: React.ReactNode
-    id?: string
 }
 
 const FormContainer = forwardRef((props: IFormContainerProps, ref:  Ref<HTMLFormElement> | LegacyRef<HTMLFormElement>) => {

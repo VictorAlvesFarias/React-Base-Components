@@ -1,10 +1,7 @@
 import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react'
 import { AccordionContextObject } from './accordion-context'
 
-interface IAccordionContainerProps {
-    children: React.ReactNode
-    className?: string
-    onClick?: (e: any) => any
+interface IAccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>((props, ref: any) => {

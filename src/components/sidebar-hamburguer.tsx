@@ -2,9 +2,7 @@ import { useContext } from "react"
 import { SidebarContextObject } from "./sidebar-context"
 import React from "react"
 
-interface SidebarHamburguerContainerProps {
-    className: string,
-    children: React.ReactNode
+interface SidebarHamburguerContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function SidebarHamburguerContainer(props: SidebarHamburguerContainerProps) {

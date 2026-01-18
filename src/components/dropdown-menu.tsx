@@ -2,10 +2,9 @@ import React, { useContext, useEffect } from "react"
 import { IDropdownOptionValue } from "./dropdown-option"
 import { DropdownContextObject } from "./dropdown-context"
 
-interface IDropdownMenuContainerProps {
+interface IDropdownMenuContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     onValueChange?: (_: IDropdownOptionValue) => void
-    children: React.ReactElement<IDropdownOptionValue> | React.ReactElement<IDropdownOptionValue>[],
-    className: string
+    children: React.ReactElement<IDropdownOptionValue> | React.ReactElement<IDropdownOptionValue>[]
 };
 
 function DropdownMenuContainer(props: IDropdownMenuContainerProps) {

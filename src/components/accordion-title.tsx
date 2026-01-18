@@ -1,11 +1,7 @@
 import React, { LegacyRef, forwardRef, useContext } from 'react';
 import { AccordionContextObject } from './accordion-context';
 
-interface IAccordionTitleContainerProps {
-    children: React.ReactNode
-    className: string
-    ref: any
-    onClick?: (e: any) => any
+interface IAccordionTitleContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const AccordionTitleContainer = forwardRef<LegacyRef<HTMLDivElement> | any, IAccordionTitleContainerProps>((_, ref: any) => {

@@ -3,14 +3,11 @@ import { SidebarContextObject } from "./sidebar-context"
 import React from "react"
 import { AccordionContextObject } from "./accordion-context"
 
-interface ISidebarItemContainerProps {
-    className: string
-    children: React.ReactNode
+interface ISidebarItemContainerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'unselectable'> {
     href?: string
     selected?: string
     menu?: boolean
     unselectable?: boolean
-    onClick?: (e: any) => any
     redirect?: (e: any) => string
     disable?: boolean
     commons?: string[]

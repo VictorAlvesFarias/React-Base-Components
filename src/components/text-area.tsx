@@ -1,19 +1,9 @@
 import React, { LegacyRef, Ref, forwardRef } from "react";
 import { useRef } from "react";
 
-interface ITextAreaContainerProps {
-    readonly?: boolean;
-    disabled?: boolean;
-    name?: string;
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => any;
-    onBlur?: (e: any) => any;
-    ref?: any;
-    value?: any;
-    className: string;
-    placeholder?: string;
-    mask?: [RegExp, string];
-    type?: string;
-    loading?: boolean;
+interface ITextAreaContainerProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    mask?: [RegExp, string]
+    loading?: boolean
 }
 
 const TextAreaContainer = forwardRef((props: ITextAreaContainerProps, ref: Ref<HTMLTextAreaElement> | LegacyRef<HTMLTextAreaElement>) => {

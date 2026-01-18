@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
 import { ModalContextObject } from './modal-context'
 
-interface IModalOpenProps {
+interface IModalOpenProps extends React.HTMLAttributes<HTMLDivElement> {
     callback?: (e: any) => any
-    className?: string,
-    children?: React.ReactNode[] | React.ReactNode
 }
 
 function ModalOpen(_: IModalOpenProps) {
@@ -17,7 +15,6 @@ function ModalOpen(_: IModalOpenProps) {
 
     return (
         <div onClick={handleOpen} className={_.className}>
-
             {_.children}
         </div>
     )

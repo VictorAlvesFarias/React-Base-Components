@@ -6,10 +6,9 @@ interface IDropdownOptionValue {
     label: string,
 }
 
-interface IDropdownOptionContainerProps {
+interface IDropdownOptionContainerProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'defaultValue'> {
     value: any,
     label: string,
-    className?: string
     defaultValue?: boolean
 }
 

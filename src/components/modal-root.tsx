@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
 import { ModalContextObject } from './modal-context'
 
-interface IModalRootContainerProps {
-    callback?: () => {},
-    className?: string,
-    children: React.ReactNode
+interface IModalRootContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+    callback?: () => {}
 }
 
 function ModalRootContainer(_: IModalRootContainerProps) {

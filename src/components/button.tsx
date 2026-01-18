@@ -1,15 +1,8 @@
 import React, { LegacyRef, forwardRef } from 'react';
 
-interface IButtonContainerProps {
+interface IButtonContainerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean
   loadingComponent?: React.ReactNode
-  children: React.ReactNode
-  className: string
-  ref: any
-  disabled?: boolean
-  onClick?: (e: any) => any
-  type?: "submit" | "reset" | "button" | undefined
-  form?: string
 }
 
 const ButtonContainer = forwardRef<LegacyRef<HTMLButtonElement> | any, IButtonContainerProps>((_, ref?) => {
