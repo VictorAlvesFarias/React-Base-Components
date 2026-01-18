@@ -39,7 +39,7 @@ const DropdownRootContainer = forwardRef((props: IDropdownRootContainerProps, re
     }
 
     useEffect(() => {
-        setStarted(inputProps.value)
+        setStarted(inputProps.value?.toString() ?? "")
     }, [])
 
     useEffect(() => {

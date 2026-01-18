@@ -38,7 +38,7 @@ const CheckboxContainer = forwardRef((props: ICheckboxContainerProps, ref: Ref<H
     }, [internalRef.current?.value])
 
     useEffect(() => {
-        setChecked(props.value)
+        setChecked(props.value?.toString() == "true")
     }, [props.value])
 
     return (
