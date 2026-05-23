@@ -19,22 +19,17 @@ export default defineConfig({
     emptyOutDir: true,
 
     rollupOptions: {
-      input: {
-        index: resolve(__dirname, 'src/index.ts'),
-      },
-
-      // Função garante que react, react-dom e qualquer sub-path sejam externos
+      input: resolve(__dirname, 'src/index.ts'),
       external: (id) => /^react(-dom)?(\/|$)/.test(id),
+
+      treeshake: false, // <- adicione isso
 
       output: {
         format: 'es',
         dir: 'dist',
-
         preserveModules: true,
-        preserveModulesRoot: resolve(__dirname, 'src'),  // caminho absoluto
-
+        preserveModulesRoot: 'src',
         entryFileNames: '[name].js',
-        exports: 'named', // <- adicione isso
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'styles.css'
           return '[name][extname]'
