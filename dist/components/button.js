@@ -1,6 +1,1 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import { forwardRef } from 'react';
-const ButtonContainer = forwardRef((_, ref) => {
-    return (_jsx("button", { ref: ref, className: _.className, onClick: _.onClick, "aria-disabled": _ === null || _ === void 0 ? void 0 : _.disabled, type: _.type, form: _.form, disabled: _.loading || (_ === null || _ === void 0 ? void 0 : _.disabled), children: _.loading ? _.loadingComponent : _.children }));
-});
-export { ButtonContainer };
+import{forwardRef as e}from"react";import{jsx as t}from"react/jsx-runtime";e((e,n)=>t(`button`,{ref:n,className:e.className,onClick:e.onClick,"aria-disabled":e?.disabled,type:e.type,form:e.form,disabled:e.loading||e?.disabled,children:e.loading?e.loadingComponent:e.children}));

@@ -1,4 +1,5 @@
-import React from "react";
+import { default as React } from 'react';
+
 interface IIfProps {
     conditional: boolean | undefined | null;
     children: React.ReactNode;
