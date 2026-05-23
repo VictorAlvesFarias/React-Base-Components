@@ -34,7 +34,7 @@ export default defineConfig({
         preserveModulesRoot: resolve(__dirname, 'src'),  // caminho absoluto
 
         entryFileNames: '[name].js',
-
+        exports: 'named', // <- adicione isso
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'styles.css'
           return '[name][extname]'
