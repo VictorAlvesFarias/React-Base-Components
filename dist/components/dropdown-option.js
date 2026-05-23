@@ -1,1 +1,22 @@
-import{DropdownContextObject as e}from"./dropdown-context.js";import{useContext as t,useEffect as n,useRef as r}from"react";import{jsx as i}from"react/jsx-runtime";function a(a){let{setOpen:o,setSelected:s,selected:c,setFilter:l,setOption:u}=t(e),d=r(!1);function f(){s(a),l(``),o(!1)}return n(()=>{d.current==0&&(d.current=!0,u({label:a.label,value:a.value})),c?.value==a.value&&(s(a),l(``))},[]),i(`span`,{onClick:f,className:a.className,children:a.label})}export{a as DropdownOptionContainer};
+import { DropdownContextObject as e } from "./dropdown-context.js";
+import { useContext as t, useEffect as n, useRef as r } from "react";
+import { jsx as i } from "react/jsx-runtime";
+//#region src/components/dropdown-option.tsx
+function a(a) {
+	let { setOpen: o, setSelected: s, selected: c, setFilter: l, setOption: u } = t(e), d = r(!1);
+	function f() {
+		s(a), l(""), o(!1);
+	}
+	return n(() => {
+		d.current == 0 && (d.current = !0, u({
+			label: a.label,
+			value: a.value
+		})), c?.value == a.value && (s(a), l(""));
+	}, []), /* @__PURE__ */ i("span", {
+		onClick: f,
+		className: a.className,
+		children: a.label
+	});
+}
+//#endregion
+export { a as DropdownOptionContainer };
