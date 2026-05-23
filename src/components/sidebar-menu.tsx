@@ -21,7 +21,7 @@ function MenuContainer(props: IMenuContainerProps) {
                 </div>
             </div>
             <div className={'flex-1 pr-12 z-40 fixed flex md:hidden  top-0 h-full w-full transition-all ' + (open ? "right-0 delay-0" : "right-full delay-500 ")}>
-                <div className={'flex-1 pr-12  fixed blur-sm h-full w-full bg-black transition-all duration-500 ' + (open ? "bg-opacity-30" : "bg-opacity-0")}>
+                <div aria-checked={open} className={'flex-1 pr-12  fixed blur-sm h-full w-full bg-black transition-all duration-500 aria-checked:bg-opacity-30 bg-opacity-0'}>
                 </div>
             </div>
         </>
