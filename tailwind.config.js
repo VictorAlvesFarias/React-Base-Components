@@ -1,12 +1,14 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  prefix: 'lib-', // Alinha o CSS gerado com o plugin do Vite
   content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{ts,tsx,js,jsx}",
   ],
   corePlugins: {
-    preflight: false,
+    preflight: false, // Evita injetar seletores globais como h1, p, body que quebram o host v4
   },
-  // Opcional: inclua apenas as utilities que você usa
-  safelist: [
-    // Adicione aqui as classes que você quer garantir que sejam geradas
-  ]
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 }
