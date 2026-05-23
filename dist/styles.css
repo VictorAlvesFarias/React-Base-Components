@@ -219,10 +219,6 @@
   --tw-bg-opacity: 0
 }
 
-.bg-opacity-30 {
-  --tw-bg-opacity: 0.3
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem
@@ -266,6 +262,10 @@
 
 .duration-500 {
   transition-duration: 500ms
+}
+
+.aria-checked\:bg-opacity-30[aria-checked="true"] {
+  --tw-bg-opacity: 0.3
 }
 
 .aria-hidden\:hidden[aria-hidden="true"] {
