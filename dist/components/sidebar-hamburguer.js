@@ -1,0 +1,1 @@
+import{SidebarContextObject as e}from"./sidebar-context.js";import{useContext as t}from"react";import{jsx as n}from"react/jsx-runtime";function r(r){let{setOpen:i,open:a}=t(e);return n(`div`,{onClick:()=>i(!a),className:r.className,children:r.children})}export{r as SidebarHamburguerContainer};

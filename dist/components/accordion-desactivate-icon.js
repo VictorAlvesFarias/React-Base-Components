@@ -1,0 +1,1 @@
+import{AccordionContextObject as e}from"./accordion-context.js";import{useContext as t}from"react";import{Fragment as n,jsx as r}from"react/jsx-runtime";function i(i){let{open:a}=t(e);return!a&&r(n,{children:i.children})}export{i as AccordionDesactivateIcon};

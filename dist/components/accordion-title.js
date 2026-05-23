@@ -1,0 +1,1 @@
+import{AccordionContextObject as e}from"./accordion-context.js";import{forwardRef as t,useContext as n}from"react";import{jsx as r}from"react/jsx-runtime";var i=t((t,i)=>{let{open:a,setOpen:o}=n(e);function s(e){o(!a),t.onClick&&t.onClick(e)}return r(`div`,{ref:i,className:t.className,onClick:s,children:t.children})});export{i as AccordionTitleContainer};

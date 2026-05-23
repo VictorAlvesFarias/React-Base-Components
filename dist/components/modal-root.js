@@ -1,0 +1,1 @@
+import{ModalContextObject as e}from"./modal-context.js";import{useContext as t}from"react";import{jsx as n}from"react/jsx-runtime";function r(r){let{open:i}=t(e);return i&&n(`div`,{"aria-checked":i,className:r.className+` z-50 w-full top-0 left-0 h-screen fixed flex`,children:r.children})}export{r as ModalRootContainer};
