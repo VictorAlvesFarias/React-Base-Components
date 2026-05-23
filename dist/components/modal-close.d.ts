@@ -1,4 +1,5 @@
-import React from 'react';
+import { default as React } from 'react';
+
 interface IModalCloseProps extends React.HTMLAttributes<HTMLDivElement> {
     open?: boolean;
     callback?: (e: any) => any;

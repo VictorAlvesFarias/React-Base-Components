@@ -1,5 +1,6 @@
-import React from "react";
-import { IDropdownOptionValue } from "./dropdown-option";
+import { default as React } from 'react';
+import { IDropdownOptionValue } from './dropdown-option';
+
 interface DropdownContextType {
     setOpen: (e: boolean) => any;
     setFilter: (e: string) => any;

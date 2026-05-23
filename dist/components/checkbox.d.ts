@@ -1,4 +1,5 @@
-import React from "react";
+import { default as React } from 'react';
+
 interface ICheckboxContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onChange?: (e: any, i?: any) => any;
     data: any;

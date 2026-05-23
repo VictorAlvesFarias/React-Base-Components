@@ -6,5 +6,5 @@ interface IAccordionContextComponent {
     children: React.ReactNode[] | React.ReactNode;
 }
 declare function AccordionContext(props: IAccordionContextComponent): import("react/jsx-runtime").JSX.Element;
-declare const AccordionContextObject: import("react").Context<IAccordionContext>;
+declare const AccordionContextObject: import('react').Context<IAccordionContext>;
 export { AccordionContextObject, IAccordionContextComponent, AccordionContext };

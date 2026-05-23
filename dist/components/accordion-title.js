@@ -1,12 +1,1 @@
-import { jsx as _jsx } from "react/jsx-runtime";
-import { forwardRef, useContext } from 'react';
-import { AccordionContextObject } from './accordion-context';
-const AccordionTitleContainer = forwardRef((_, ref) => {
-    const { open, setOpen } = useContext(AccordionContextObject);
-    function handleOpenAccordionTitle(e) {
-        setOpen(!open);
-        _.onClick ? _.onClick(e) : null;
-    }
-    return (_jsx("div", { ref: ref, className: _.className, onClick: handleOpenAccordionTitle, children: _.children }));
-});
-export { AccordionTitleContainer };
+import{AccordionContextObject as e}from"./accordion-context.js";import{forwardRef as t,useContext as n}from"react";import{jsx as r}from"react/jsx-runtime";t((t,i)=>{let{open:a,setOpen:o}=n(e);function s(e){o(!a),t.onClick&&t.onClick(e)}return r(`div`,{ref:i,className:t.className,onClick:s,children:t.children})});
