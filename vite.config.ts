@@ -15,18 +15,21 @@ export default defineConfig({
   ],
 
   build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      formats: ['es'],
+      fileName: 'index',
+    },
+
     outDir: 'dist',
     emptyOutDir: true,
 
     rollupOptions: {
-      input: resolve(__dirname, 'src/index.ts'),
       external: (id) => /^react(-dom)?(\/|$)/.test(id),
 
-      treeshake: false, // <- adicione isso
+      treeshake: false,
 
       output: {
-        format: 'es',
-        dir: 'dist',
         preserveModules: true,
         preserveModulesRoot: 'src',
         entryFileNames: '[name].js',
