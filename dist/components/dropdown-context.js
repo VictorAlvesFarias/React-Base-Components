@@ -1,1 +1,0 @@
-import{createContext as e}from"react";import"react/jsx-runtime";var t=e({open:!1,setOpen:()=>{},setSelected:()=>{},setStarted:()=>{},setFilter:()=>{},setOption:()=>{},selected:null,filter:``,started:null,options:[]});export{t as DropdownContextObject};

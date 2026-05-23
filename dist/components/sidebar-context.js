@@ -1,1 +1,0 @@
-import{createContext as e}from"react";import"react/jsx-runtime";e({open:!0,setOpen:()=>{},selected:``});
