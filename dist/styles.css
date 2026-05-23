@@ -244,6 +244,10 @@
   transition-duration: 150ms
 }
 
+.delay-500 {
+  transition-delay: 500ms
+}
+
 .duration-300 {
   transition-duration: 300ms
 }
@@ -258,6 +262,10 @@
 
 .aria-checked\:bg-opacity-30[aria-checked="true"] {
   --tw-bg-opacity: 0.3
+}
+
+.aria-checked\:delay-0[aria-checked="true"] {
+  transition-delay: 0s
 }
 
 .aria-hidden\:hidden[aria-hidden="true"] {
