@@ -1,15 +1,17 @@
-import { forwardRef as e } from "react";
-import { jsx as t } from "react/jsx-runtime";
+import { forwardRef } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/button.tsx
-var n = e((e, n) => /* @__PURE__ */ t("button", {
-	ref: n,
-	className: e.className,
-	onClick: e.onClick,
-	"aria-disabled": e?.disabled,
-	type: e.type,
-	form: e.form,
-	disabled: e.loading || e?.disabled,
-	children: e.loading ? e.loadingComponent : e.children
-}));
+var ButtonContainer = forwardRef((_, ref) => {
+	return /* @__PURE__ */ jsx("button", {
+		ref,
+		className: _.className,
+		onClick: _.onClick,
+		"aria-disabled": _?.disabled,
+		type: _.type,
+		form: _.form,
+		disabled: _.loading || _?.disabled,
+		children: _.loading ? _.loadingComponent : _.children
+	});
+});
 //#endregion
-export { n as ButtonContainer };
+export { ButtonContainer };

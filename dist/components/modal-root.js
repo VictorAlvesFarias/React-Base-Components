@@ -1,14 +1,14 @@
-import { ModalContextObject as e } from "./modal-context.js";
-import { useContext as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { ModalContextObject } from "./modal-context.js";
+import { useContext } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/modal-root.tsx
-function r(r) {
-	let { open: i } = t(e);
-	return i && /* @__PURE__ */ n("div", {
-		"aria-checked": i,
-		className: r.className + " z-50 w-full top-0 left-0 h-screen fixed flex",
-		children: r.children
+function ModalRootContainer(_) {
+	const { open } = useContext(ModalContextObject);
+	return open && /* @__PURE__ */ jsx("div", {
+		"aria-checked": open,
+		className: _.className + " z-50 w-full top-0 left-0 h-screen fixed flex",
+		children: _.children
 	});
 }
 //#endregion
-export { r as ModalRootContainer };
+export { ModalRootContainer };

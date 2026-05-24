@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-
 interface ITextAreaContainerProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     mask?: [RegExp, string];
     loading?: boolean;

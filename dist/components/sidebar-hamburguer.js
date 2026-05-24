@@ -1,14 +1,14 @@
-import { SidebarContextObject as e } from "./sidebar-context.js";
-import { useContext as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { SidebarContextObject } from "./sidebar-context.js";
+import { useContext } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/sidebar-hamburguer.tsx
-function r(r) {
-	let { setOpen: i, open: a } = t(e);
-	return /* @__PURE__ */ n("div", {
-		onClick: () => i(!a),
-		className: r.className,
-		children: r.children
+function SidebarHamburguerContainer(props) {
+	const { setOpen, open } = useContext(SidebarContextObject);
+	return /* @__PURE__ */ jsx("div", {
+		onClick: () => setOpen(!open),
+		className: props.className,
+		children: props.children
 	});
 }
 //#endregion
-export { r as SidebarHamburguerContainer };
+export { SidebarHamburguerContainer };

@@ -1,22 +1,33 @@
-import { DropdownContextObject as e } from "./dropdown-context.js";
-import { useContext as t, useEffect as n, useRef as r } from "react";
-import { jsx as i } from "react/jsx-runtime";
+import { DropdownContextObject } from "./dropdown-context.js";
+import { useContext, useEffect, useRef } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/dropdown-option.tsx
-function a(a) {
-	let { setOpen: o, setSelected: s, selected: c, setFilter: l, setOption: u } = t(e), d = r(!1);
-	function f() {
-		s(a), l(""), o(!1);
+function DropdownOptionContainer(props) {
+	const { setOpen, setSelected, selected, setFilter, setOption } = useContext(DropdownContextObject);
+	const addedRef = useRef(false);
+	function handleSetOption() {
+		setSelected(props);
+		setFilter("");
+		setOpen(false);
 	}
-	return n(() => {
-		d.current == 0 && (d.current = !0, u({
-			label: a.label,
-			value: a.value
-		})), c?.value == a.value && (s(a), l(""));
-	}, []), /* @__PURE__ */ i("span", {
-		onClick: f,
-		className: a.className,
-		children: a.label
+	useEffect(() => {
+		if (addedRef.current == false) {
+			addedRef.current = true;
+			setOption({
+				label: props.label,
+				value: props.value
+			});
+		}
+		if (selected?.value == props.value) {
+			setSelected(props);
+			setFilter("");
+		}
+	}, []);
+	return /* @__PURE__ */ jsx("span", {
+		onClick: handleSetOption,
+		className: props.className,
+		children: props.label
 	});
 }
 //#endregion
-export { a as DropdownOptionContainer };
+export { DropdownOptionContainer };

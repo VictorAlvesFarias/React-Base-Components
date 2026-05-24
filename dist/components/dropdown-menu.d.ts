@@ -1,6 +1,5 @@
 import { default as React } from 'react';
 import { IDropdownOptionValue } from './dropdown-option';
-
 interface IDropdownMenuContainerProps extends React.HTMLAttributes<HTMLDivElement> {
     onValueChange?: (_: IDropdownOptionValue) => void;
     children: React.ReactElement<IDropdownOptionValue> | React.ReactElement<IDropdownOptionValue>[];

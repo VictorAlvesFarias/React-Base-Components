@@ -1,37 +1,40 @@
-import { AccordionContextObject as e } from "./accordion-context.js";
-import { SidebarContextObject as t } from "./sidebar-context.js";
-import { useContext as n } from "react";
-import { jsx as r } from "react/jsx-runtime";
+import { AccordionContextObject } from "./accordion-context.js";
+import { SidebarContextObject } from "./sidebar-context.js";
+import { useContext } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/sidebar-item.tsx
-function i(i) {
-	let { selected: a } = n(t), { open: o, setOpen: s } = n(e);
-	function c() {
-		let e = !1;
-		if (i.href) !i.unselectable && a?.includes(i.href) && (e = !0);
-		else if (i.commons && a) {
-			for (let t = 0; t < i.commons.length; t++) if (a?.includes(i.commons[t])) {
-				e = !0;
+function SidebarSidebarItemContainerContainer(props) {
+	const { selected } = useContext(SidebarContextObject);
+	const { open, setOpen } = useContext(AccordionContextObject);
+	function handleIsSelected() {
+		let result = false;
+		if (props.href) {
+			if (!props.unselectable && selected?.includes(props.href)) result = true;
+		} else if (props.commons && selected) {
+			for (let i = 0; i < props.commons.length; i++) if (selected?.includes(props.commons[i])) {
+				result = true;
 				break;
 			}
 		}
-		return e;
+		return result;
 	}
-	function l(e) {
-		i.onClick && i.onClick(e), i.redirect && i.redirect(i.href ?? "");
+	function handleOnCLick(e) {
+		if (props.onClick) props.onClick(e);
+		if (props.redirect) props.redirect(props.href ?? "");
 	}
-	return i.disable ? /* @__PURE__ */ r("div", {
-		"aria-selected": c(),
-		onClick: i.onClick,
-		"aria-checked": o && i.menu == 1,
-		className: i.className,
-		children: i.children
-	}) : /* @__PURE__ */ r("div", {
-		onClick: l,
-		"aria-selected": c(),
-		"aria-checked": o,
-		className: i.className,
-		children: i.children
+	return !props.disable ? /* @__PURE__ */ jsx("div", {
+		onClick: handleOnCLick,
+		"aria-selected": handleIsSelected(),
+		"aria-checked": open,
+		className: props.className,
+		children: props.children
+	}) : /* @__PURE__ */ jsx("div", {
+		"aria-selected": handleIsSelected(),
+		onClick: props.onClick,
+		"aria-checked": open && props.menu == true,
+		className: props.className,
+		children: props.children
 	});
 }
 //#endregion
-export { i as SidebarSidebarItemContainerContainer };
+export { SidebarSidebarItemContainerContainer };

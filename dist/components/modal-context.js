@@ -1,29 +1,29 @@
-import { createContext as e, forwardRef as t, useImperativeHandle as n, useState as r } from "react";
-import { jsx as i } from "react/jsx-runtime";
+import { createContext, forwardRef, useImperativeHandle, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/modal-context.tsx
-var a = t((e, t) => {
-	let [a, s] = r(e.initialOpen || !1);
-	n(t, () => ({
-		open: () => s(!0),
-		close: () => s(!1),
-		toggle: () => s(!a),
-		isOpen: () => a
+var ModalContext = forwardRef((props, ref) => {
+	const [open, setOpen] = useState(props.initialOpen || false);
+	useImperativeHandle(ref, () => ({
+		open: () => setOpen(true),
+		close: () => setOpen(false),
+		toggle: () => setOpen(!open),
+		isOpen: () => open
 	}));
-	let c = {
+	const context = {
 		setOpen: (e) => {
-			s(e);
+			setOpen(e);
 		},
-		open: a
+		open
 	};
-	return /* @__PURE__ */ i(o.Provider, {
-		value: c,
-		children: e.children
+	return /* @__PURE__ */ jsx(ModalContextObject.Provider, {
+		value: context,
+		children: props.children
 	});
 });
-a.displayName = "ModalContext";
-var o = e({
-	open: !1,
+ModalContext.displayName = "ModalContext";
+var ModalContextObject = createContext({
+	open: false,
 	setOpen: () => {}
 });
 //#endregion
-export { a as ModalContext, o as ModalContextObject };
+export { ModalContext, ModalContextObject };

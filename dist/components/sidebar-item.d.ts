@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-
 interface ISidebarItemContainerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'unselectable'> {
     href?: string;
     selected?: string;

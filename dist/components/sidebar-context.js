@@ -1,23 +1,24 @@
-import { createContext as e, useState as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { createContext, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/sidebar-context.tsx
-var r = e({
-	open: !0,
+var SidebarContextObject = createContext({
+	open: true,
 	setOpen: () => {},
 	selected: ""
 });
-function i(e) {
-	let [i, a] = t(!1), o = {
-		open: i,
+function SidebarContext(props) {
+	const [open, setOpen] = useState(false);
+	const context = {
+		open,
 		setOpen: (e) => {
-			a(e);
+			setOpen(e);
 		},
-		selected: e.getPathname?.() ?? ""
+		selected: props.getPathname?.() ?? ""
 	};
-	return /* @__PURE__ */ n(r.Provider, {
-		value: o,
-		children: e.children
+	return /* @__PURE__ */ jsx(SidebarContextObject.Provider, {
+		value: context,
+		children: props.children
 	});
 }
 //#endregion
-export { i as SidebarContext, r as SidebarContextObject };
+export { SidebarContext, SidebarContextObject };

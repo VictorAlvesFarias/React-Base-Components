@@ -1,17 +1,19 @@
-import { DropdownContextObject as e } from "./dropdown-context.js";
-import { useContext as t, useEffect as n } from "react";
-import { jsx as r } from "react/jsx-runtime";
-function i(i) {
-	let { filter: a, started: o, setSelected: s } = t(e), c = Array.isArray(i.children) ? i.children : [i.children];
-	return n(() => {
-		o != null && s({
-			value: o,
-			label: c.filter((e) => e.props.value == o)[0].props.label
+import { DropdownContextObject } from "./dropdown-context.js";
+import { useContext, useEffect } from "react";
+import { jsx } from "react/jsx-runtime";
+function DropdownMenuContainer(props) {
+	const { filter, started, setSelected } = useContext(DropdownContextObject);
+	const items = Array.isArray(props.children) ? props.children : [props.children];
+	useEffect(() => {
+		if (started != null) setSelected({
+			value: started,
+			label: items.filter((e) => e.props.value == started)[0].props.label
 		});
-	}, [o]), /* @__PURE__ */ r("div", {
-		className: "w-full flex flex-col " + i.className,
-		children: c.filter((e) => e.props.label.toLowerCase().includes(a.toLowerCase())).map((e) => e)
+	}, [started]);
+	return /* @__PURE__ */ jsx("div", {
+		className: "w-full flex flex-col " + props.className,
+		children: items.filter((e) => e.props.label.toLowerCase().includes(filter.toLowerCase())).map((e) => e)
 	});
 }
 //#endregion
-export { i as DropdownMenuContainer };
+export { DropdownMenuContainer };

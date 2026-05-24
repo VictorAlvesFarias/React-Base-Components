@@ -1,6 +1,5 @@
 import { IDropdownMenuContainerProps } from './dropdown-menu';
 import { default as React } from 'react';
-
 interface IDropdownRootContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     children: React.ReactElement<IDropdownMenuContainerProps>;
 }
