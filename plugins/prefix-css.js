@@ -51,12 +51,20 @@ export function prefixClasses() {
 
                 // className={expressao + 'classes estáticas'} ou className={'classes estáticas' + expressao}
                 newCode = newCode.replace(/className=\{([^}]*?)'([^']+)'([^}]*?)\}/g, (_, before, classes, after) => {
-                    return `className={${before}'${prefixList(classes)}'${after}}`
+                    const prefixed = prefixList(classes.trim())
+                    const hasBeforeExpr = before.trim().length > 0
+                    const hasAfterExpr = after.trim().length > 0
+                    const spaced = `${hasBeforeExpr ? ' ' : ''}${prefixed}${hasAfterExpr ? ' ' : ''}`
+                    return `className={${before}'${spaced}'${after}}`
                 })
 
                 // Mesma coisa com aspas duplas dentro do {}
                 newCode = newCode.replace(/className=\{([^}]*?)"([^"]+)"([^}]*?)\}/g, (_, before, classes, after) => {
-                    return `className={${before}"${prefixList(classes)}"${after}}`
+                    const prefixed = prefixList(classes.trim())
+                    const hasBeforeExpr = before.trim().length > 0
+                    const hasAfterExpr = after.trim().length > 0
+                    const spaced = `${hasBeforeExpr ? ' ' : ''}${prefixed}${hasAfterExpr ? ' ' : ''}`
+                    return `className={${before}"${spaced}"${after}}`
                 })
 
                 newCode = newCode.replace(/className=\{`([^`]+)`\}/g, (_, content) => {
