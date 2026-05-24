@@ -1,3 +1,27 @@
+
+function prefixList(classes: string): string {
+    return classes
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((c: string) => {
+            const match = c.match(/^((?:[a-zA-Z0-9_-]+:)*)(.+)$/)
+
+            if (!match) {
+                return c
+            }
+
+            const variant = match[1]
+            const className = match[2]
+
+            if (className.startsWith('lib-')) {
+                return c
+            }
+
+            return `${variant}lib-${className}`
+        })
+        .join(' ')
+}
+
 export function prefixClasses() {
     return {
         name: 'prefix-classes',
@@ -48,27 +72,4 @@ export function prefixClasses() {
             return null
         }
     }
-}
-
-function prefixList(classes: string): string {
-    return classes
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((c: string) => {
-            const match = c.match(/^((?:[a-zA-Z0-9_-]+:)*)(.+)$/)
-
-            if (!match) {
-                return c
-            }
-
-            const variant = match[1]
-            const className = match[2]
-
-            if (className.startsWith('lib-')) {
-                return c
-            }
-
-            return `${variant}lib-${className}`
-        })
-        .join(' ')
 }

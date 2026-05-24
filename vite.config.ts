@@ -6,7 +6,8 @@ import { prefixClasses } from './plugins/prefix-css'
 export default defineConfig({
   plugins: [
     prefixClasses(),
-    react()
+    react(),
+    dts({ insertTypesEntry: true, include: ['src'] }),
   ],
   build: {
     lib: {
@@ -36,3 +37,7 @@ export default defineConfig({
     }
   }
 })
+
+function dts(arg0: { insertTypesEntry: boolean; include: string[] }): import("vite").PluginOption {
+  throw new Error('Function not implemented.')
+}
