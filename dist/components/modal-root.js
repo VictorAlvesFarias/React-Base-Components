@@ -6,7 +6,7 @@ function ModalRootContainer(_) {
 	const { open } = useContext(ModalContextObject);
 	return open && /* @__PURE__ */ jsx("div", {
 		"aria-checked": open,
-		className: _.className + " z-50 w-full top-0 left-0 h-screen fixed flex",
+		className: _.className + "lib-z-50 lib-w-full lib-top-0 lib-left-0 lib-h-screen lib-fixed lib-flex",
 		children: _.children
 	});
 }

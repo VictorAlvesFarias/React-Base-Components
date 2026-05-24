@@ -11,7 +11,7 @@ function DropdownMenuContainer(props) {
 		});
 	}, [started]);
 	return /* @__PURE__ */ jsx("div", {
-		className: "w-full flex flex-col " + props.className,
+		className: "lib-w-full lib-flex lib-flex-col" + props.className,
 		children: items.filter((e) => e.props.label.toLowerCase().includes(filter.toLowerCase())).map((e) => e)
 	});
 }
