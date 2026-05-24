@@ -7,14 +7,14 @@ function MenuContainer(props) {
 	return /* @__PURE__ */ jsxs(Fragment, { children: [
 		/* @__PURE__ */ jsx("div", {
 			"aria-checked": open,
-			className: "md:lib-flex lib-hidden lib-overflow-y-auto" + props.className,
+			className: "md:lib-flex lib-hidden lib-overflow-y-auto " + props.className,
 			children: props.children
 		}),
 		/* @__PURE__ */ jsxs("div", {
 			"aria-checked": open,
 			className: `md:lib-hidden lib-fixed lib-z-50 lib-w-full lib-flex lib-top-0 lib-h-screen lib-transition-all lib-duration-500 aria-checked:lib-right-0 lib-right-full`,
 			children: [/* @__PURE__ */ jsx("div", {
-				className: "lib-flex lib-overflow-y-auto md:lib-hidden" + props.className,
+				className: "lib-flex lib-overflow-y-auto md:lib-hidden " + props.className,
 				role: "dialog",
 				"aria-modal": "true",
 				children: props.children
