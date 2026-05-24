@@ -1,7 +1,7 @@
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
-import prefixCssClasses from './plugins/postcss-prefix-classes.ts'
-import postcssIsolateVariables from './plugins/postcss-isolate-variables.ts'
+import prefixCssClasses from './plugins/postcss-prefix-classes.js'
+import postcssIsolateVariables from './plugins/postcss-isolate-variables.js'
 
 export default {
   plugins: [
