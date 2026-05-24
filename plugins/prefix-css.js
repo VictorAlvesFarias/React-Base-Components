@@ -1,9 +1,9 @@
 
-function prefixList(classes: string): string {
+function prefixList(classes) {
     return classes
         .split(/\s+/)
         .filter(Boolean)
-        .map((c: string) => {
+        .map((c) => {
             const match = c.match(/^((?:[a-zA-Z0-9_-]+:)*)(.+)$/)
 
             if (!match) {
@@ -25,8 +25,8 @@ function prefixList(classes: string): string {
 export function prefixClasses() {
     return {
         name: 'prefix-classes',
-        enforce: 'pre' as const,
-        transform(code: any, id: any) {
+        enforce: 'pre',
+        transform(code, id) {
             if (!id.includes('node_modules') && /\.(ts|tsx|js|jsx)$/.test(id)) {
                 if (!code.includes('className')) {
                     return null
@@ -34,21 +34,21 @@ export function prefixClasses() {
 
                 let newCode = code
 
-                newCode = newCode.replace(/className="([^"]+)"/g, (_: any, classes: any) => {
+                newCode = newCode.replace(/className="([^"]+)"/g, (_, classes) => {
                     return `className="${prefixList(classes)}"`
                 })
 
-                newCode = newCode.replace(/className=\{'([^']+)'\}/g, (_: any, classes: any) => {
+                newCode = newCode.replace(/className=\{'([^']+)'\}/g, (_, classes) => {
                     return `className={'${prefixList(classes)}'}`
                 })
 
-                newCode = newCode.replace(/className=\{`([^`]+)`\}/g, (_: any, content: any) => {
-                    const prefixed = content.replace(/([^${}]+)|\$\{[^}]*\}/g, (segment: any) => {
+                newCode = newCode.replace(/className=\{`([^`]+)`\}/g, (_, content) => {
+                    const prefixed = content.replace(/([^${}]+)|\$\{[^}]*\}/g, (segment) => {
                         if (segment.startsWith('${')) {
                             return segment
                         }
 
-                        return segment.replace(/(\S+)/g, (cls: any) => {
+                        return segment.replace(/(\S+)/g, (cls) => {
                             const match = cls.match(/^((?:[a-zA-Z0-9_-]+:)*)(.+)$/)
                             if (!match) {
                                 return cls

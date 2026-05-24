@@ -1,8 +1,8 @@
 const postcssIsolateVariables = () => {
     return {
         postcssPlugin: 'postcss-isolate-variables',
-        Once(root: any) {
-            root.walkDecls((decl: any) => {
+        Once(root) {
+            root.walkDecls((decl) => {
                 if (decl.prop.startsWith('--tw-')) {
                     decl.prop = decl.prop.replace('--tw-', '--lib-tw-')
                 }

@@ -4,11 +4,11 @@ import { root } from "postcss"
 const prefixCssClasses = () => {
     return {
         postcssPlugin: 'prefix-css-classes',
-        Once(root: any) {
-            root.walkRules((rule: any) => {
+        Once(root) {
+            root.walkRules((rule) => {
                 rule.selector = rule.selector.replace(
                     /\.(-?[a-zA-Z][a-zA-Z0-9_\\:-]*)/g,
-                    (match: any, cls: any) => {
+                    (match, cls) => {
                         if (cls.startsWith('lib-')) {
                             return match
                         }
