@@ -34,7 +34,7 @@ export default defineConfig({
         preserveModulesRoot: 'src',
         entryFileNames: '[name].js',
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'styles.css'
+          if (assetInfo.name === 'index.css') return 'styles.css'
           return '[name][extname]'
         }
       }
