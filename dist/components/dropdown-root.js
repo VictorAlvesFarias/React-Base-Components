@@ -40,7 +40,7 @@ var DropdownRootContainer = forwardRef((props, ref) => {
 		});
 	}, [internalRef.current?.value]);
 	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsxs("div", {
-		className: "w-full relative",
+		className: "lib-w-full lib-relative",
 		children: [/* @__PURE__ */ jsxs("div", {
 			"aria-disabled": props.disabled,
 			className: props.className + " z-[9] relative",
@@ -56,7 +56,7 @@ var DropdownRootContainer = forwardRef((props, ref) => {
 			}), /* @__PURE__ */ jsx("input", {
 				...inputProps,
 				"aria-hidden": props.value && props.value != "" ? true : false,
-				className: "bg-transparent outline-none w-0",
+				className: "lib-bg-transparent lib-outline-none lib-w-0",
 				disabled: props.disabled,
 				value: inputProps.value || "",
 				ref: handleRef,
@@ -73,7 +73,7 @@ var DropdownRootContainer = forwardRef((props, ref) => {
 	}), /* @__PURE__ */ jsx("div", {
 		"aria-hidden": !open,
 		onClick: () => setOpen(!open),
-		className: "z-[10] fixed w-full top-0 left-0 h-full aria-hidden:hidden"
+		className: "lib-z-[10] lib-fixed lib-w-full lib-top-0 lib-left-0 lib-h-full aria-hidden:lib-hidden"
 	})] });
 });
 //#endregion
