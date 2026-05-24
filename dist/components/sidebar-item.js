@@ -1,1 +1,37 @@
-import{AccordionContextObject as e}from"./accordion-context.js";import{SidebarContextObject as t}from"./sidebar-context.js";import{useContext as n}from"react";import{jsx as r}from"react/jsx-runtime";function i(i){let{selected:a}=n(t),{open:o,setOpen:s}=n(e);function c(){let e=!1;if(i.href)!i.unselectable&&a?.includes(i.href)&&(e=!0);else if(i.commons&&a){for(let t=0;t<i.commons.length;t++)if(a?.includes(i.commons[t])){e=!0;break}}return e}function l(e){i.onClick&&i.onClick(e),i.redirect&&i.redirect(i.href??``)}return i.disable?r(`div`,{"aria-selected":c(),onClick:i.onClick,"aria-checked":o&&i.menu==1,className:i.className,children:i.children}):r(`div`,{onClick:l,"aria-selected":c(),"aria-checked":o,className:i.className,children:i.children})}export{i as SidebarSidebarItemContainerContainer};
+import { AccordionContextObject as e } from "./accordion-context.js";
+import { SidebarContextObject as t } from "./sidebar-context.js";
+import { useContext as n } from "react";
+import { jsx as r } from "react/jsx-runtime";
+//#region src/components/sidebar-item.tsx
+function i(i) {
+	let { selected: a } = n(t), { open: o, setOpen: s } = n(e);
+	function c() {
+		let e = !1;
+		if (i.href) !i.unselectable && a?.includes(i.href) && (e = !0);
+		else if (i.commons && a) {
+			for (let t = 0; t < i.commons.length; t++) if (a?.includes(i.commons[t])) {
+				e = !0;
+				break;
+			}
+		}
+		return e;
+	}
+	function l(e) {
+		i.onClick && i.onClick(e), i.redirect && i.redirect(i.href ?? "");
+	}
+	return i.disable ? /* @__PURE__ */ r("div", {
+		"aria-selected": c(),
+		onClick: i.onClick,
+		"aria-checked": o && i.menu == 1,
+		className: i.className,
+		children: i.children
+	}) : /* @__PURE__ */ r("div", {
+		onClick: l,
+		"aria-selected": c(),
+		"aria-checked": o,
+		className: i.className,
+		children: i.children
+	});
+}
+//#endregion
+export { i as SidebarSidebarItemContainerContainer };
