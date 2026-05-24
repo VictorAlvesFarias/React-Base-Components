@@ -8,16 +8,12 @@ const prefixCssClasses = () => {
                     (match, cls) => {
                         if (cls.startsWith('lib-')) return match
 
-                        const unescaped = cls.replace(/\\/g, '')
-                        const parts = unescaped.split(':')
+                        // Não remove escapes — trabalha direto com o CSS escapado
+                        const parts = cls.split('\\:')
                         const utilityClass = parts[parts.length - 1]
                         const variants = parts.slice(0, -1)
 
-                        const escapedUtility = utilityClass
-                            .replace(/\[/g, '\\[')
-                            .replace(/\]/g, '\\]')
-
-                        return `.${variants.length ? variants.join('\\:') + '\\:' : ''}lib-${escapedUtility}`
+                        return `.${variants.length ? variants.join('\\:') + '\\:' : ''}lib-${utilityClass}`
                     }
                 )
             })
