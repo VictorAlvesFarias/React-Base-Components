@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-
 interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     mask?: [RegExp, string];
     date?: string;

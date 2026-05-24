@@ -1,33 +1,38 @@
-import { createContext as e, useState as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { createContext, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/dropdown-context.tsx
-function r(e) {
-	let [r, a] = t(!1), [o, s] = t(null), [c, l] = t(null), [u, d] = t(""), [f, p] = t([]);
-	function m(e) {
-		p((t) => [...t, e]);
+function DropdownContext(props) {
+	const [open, setOpen] = useState(false);
+	const [started, setStarted] = useState(null);
+	const [selected, setSelected] = useState(null);
+	const [filter, setFilter] = useState("");
+	const [options, setOption] = useState([]);
+	function handleAddOption(item) {
+		setOption((e) => [...e, item]);
 	}
-	function h(t) {
-		e?.onChange && e.onChange(t?.value), l(t);
+	function handleSetSelected(e) {
+		props?.onChange && props.onChange(e?.value);
+		setSelected(e);
 	}
-	let g = {
-		setOpen: a,
-		open: r,
-		setSelected: h,
-		selected: c,
-		filter: u,
-		setFilter: d,
-		started: o,
-		setStarted: s,
-		setOption: m,
-		options: f
+	const context = {
+		setOpen,
+		open,
+		setSelected: handleSetSelected,
+		selected,
+		filter,
+		setFilter,
+		started,
+		setStarted,
+		setOption: handleAddOption,
+		options
 	};
-	return /* @__PURE__ */ n(i.Provider, {
-		value: g,
-		children: e.children
+	return /* @__PURE__ */ jsx(DropdownContextObject.Provider, {
+		value: context,
+		children: props.children
 	});
 }
-var i = e({
-	open: !1,
+var DropdownContextObject = createContext({
+	open: false,
 	setOpen: () => {},
 	setSelected: () => {},
 	setStarted: () => {},
@@ -39,4 +44,4 @@ var i = e({
 	options: []
 });
 //#endregion
-export { r as DropdownContext, i as DropdownContextObject };
+export { DropdownContext, DropdownContextObject };

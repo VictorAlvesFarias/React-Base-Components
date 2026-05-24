@@ -1,17 +1,18 @@
-import { ModalContextObject as e } from "./modal-context.js";
-import { useContext as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { ModalContextObject } from "./modal-context.js";
+import { useContext } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/modal-open.tsx
-function r(r) {
-	let { setOpen: i } = t(e);
-	function a(e) {
-		i(!0), r.callback;
+function ModalOpen(_) {
+	const { setOpen } = useContext(ModalContextObject);
+	function handleOpen(e) {
+		setOpen(true);
+		_.callback;
 	}
-	return /* @__PURE__ */ n("div", {
-		onClick: a,
-		className: r.className,
-		children: r.children
+	return /* @__PURE__ */ jsx("div", {
+		onClick: handleOpen,
+		className: _.className,
+		children: _.children
 	});
 }
 //#endregion
-export { r as ModalOpen };
+export { ModalOpen };

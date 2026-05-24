@@ -1,8 +1,8 @@
 import "react";
-import { Fragment as e, jsx as t } from "react/jsx-runtime";
+import { Fragment, jsx } from "react/jsx-runtime";
 //#region src/components/if.tsx
-function n(n) {
-	return n.conditional && /* @__PURE__ */ t(e, { children: n.children });
+function If(props) {
+	return props.conditional && /* @__PURE__ */ jsx(Fragment, { children: props.children });
 }
 //#endregion
-export { n as If };
+export { If };

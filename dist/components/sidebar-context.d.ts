@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-
 interface ISidebarContext {
     open: boolean;
     setOpen: (e: boolean) => any;

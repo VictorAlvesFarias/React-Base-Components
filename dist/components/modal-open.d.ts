@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-
 interface IModalOpenProps extends React.HTMLAttributes<HTMLDivElement> {
     callback?: (e: any) => any;
 }

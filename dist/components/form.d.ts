@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-
 interface IFormContainerProps extends React.FormHTMLAttributes<HTMLFormElement> {
     onSubmit: (e: any) => any;
 }

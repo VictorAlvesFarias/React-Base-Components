@@ -1,37 +1,37 @@
-import { SidebarContextObject as e } from "./sidebar-context.js";
-import { useContext as t } from "react";
-import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
+import { SidebarContextObject } from "./sidebar-context.js";
+import { useContext } from "react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 //#region src/components/sidebar-menu.tsx
-function a(a) {
-	let { open: o, setOpen: s } = t(e);
-	return /* @__PURE__ */ i(n, { children: [
-		/* @__PURE__ */ r("div", {
-			"aria-checked": o,
-			className: "md:flex hidden overflow-y-auto " + a.className,
-			children: a.children
+function MenuContainer(props) {
+	const { open, setOpen } = useContext(SidebarContextObject);
+	return /* @__PURE__ */ jsxs(Fragment, { children: [
+		/* @__PURE__ */ jsx("div", {
+			"aria-checked": open,
+			className: "md:flex hidden overflow-y-auto " + props.className,
+			children: props.children
 		}),
-		/* @__PURE__ */ i("div", {
-			"aria-checked": o,
-			className: "md:hidden fixed z-50 w-full flex top-0 h-screen transition-all duration-500 aria-checked:right-0 right-full",
-			children: [/* @__PURE__ */ r("div", {
-				className: "flex overflow-y-auto md:hidden " + a.className,
+		/* @__PURE__ */ jsxs("div", {
+			"aria-checked": open,
+			className: `md:lib-hidden lib-fixed lib-z-50 lib-w-full lib-flex lib-top-0 lib-h-screen lib-transition-all lib-duration-500 aria-checked:lib-right-0 lib-right-full`,
+			children: [/* @__PURE__ */ jsx("div", {
+				className: "flex overflow-y-auto md:hidden " + props.className,
 				role: "dialog",
 				"aria-modal": "true",
-				children: a.children
-			}), /* @__PURE__ */ r("div", {
-				className: "flex-1 pr-12 w-full h-full ",
-				onClick: () => s(!1)
+				children: props.children
+			}), /* @__PURE__ */ jsx("div", {
+				className: "lib-flex-1 lib-pr-12 lib-w-full lib-h-full",
+				onClick: () => setOpen(false)
 			})]
 		}),
-		/* @__PURE__ */ r("div", {
-			"aria-checked": o,
-			className: "flex-1 pr-12 z-40 fixed flex md:hidden top-0 h-full w-full aria-checked:delay-0 delay-500 aria-checked:right-0 right-full",
-			children: /* @__PURE__ */ r("div", {
-				"aria-checked": o,
-				className: "flex-1 pr-12  fixed blur-sm h-full w-full bg-black transition-all duration-500 aria-checked:bg-opacity-30 bg-opacity-0"
+		/* @__PURE__ */ jsx("div", {
+			"aria-checked": open,
+			className: "lib-flex-1 lib-pr-12 lib-z-40 lib-fixed lib-flex md:lib-hidden lib-top-0 lib-h-full lib-w-full aria-checked:lib-delay-0 lib-delay-500 aria-checked:lib-right-0 lib-right-full",
+			children: /* @__PURE__ */ jsx("div", {
+				"aria-checked": open,
+				className: "lib-flex-1 lib-pr-12 lib-fixed lib-blur-sm lib-h-full lib-w-full lib-bg-black lib-transition-all lib-duration-500 aria-checked:lib-bg-opacity-30 lib-bg-opacity-0"
 			})
 		})
 	] });
 }
 //#endregion
-export { a as MenuContainer };
+export { MenuContainer };

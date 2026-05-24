@@ -1,27 +1,29 @@
-import { forwardRef as e, useRef as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { forwardRef, useRef } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/text-area.tsx
-var r = e((e, r) => {
-	let i = t(null);
-	function a(e) {
-		i.current = e, r instanceof Function && r(e);
+var TextAreaContainer = forwardRef((props, ref) => {
+	const internalRef = useRef(null);
+	function handleRef(element) {
+		internalRef.current = element;
+		if (ref instanceof Function) ref(element);
 	}
-	function o(t) {
-		t.target.value = e.mask ? t.target.value.replace(/\D/g, "").replace(e.mask[0], e.mask[1]) : t.target.value, e?.onChange && e.onChange(t);
+	function handleOnChange(e) {
+		e.target.value = props.mask ? e.target.value.replace(/\D/g, "").replace(props.mask[0], props.mask[1]) : e.target.value;
+		props?.onChange && props.onChange(e);
 	}
-	return /* @__PURE__ */ n("div", {
-		onClick: () => i.current?.focus(),
-		className: e.className,
-		"aria-disabled": e.disabled,
-		"aria-atomic": e.loading,
-		children: /* @__PURE__ */ n("textarea", {
-			...e,
-			className: "bg-transparent outline-none w-full h-full resize-none",
-			placeholder: e.placeholder,
-			ref: a,
-			onChange: o
+	return /* @__PURE__ */ jsx("div", {
+		onClick: () => internalRef.current?.focus(),
+		className: props.className,
+		"aria-disabled": props.disabled,
+		"aria-atomic": props.loading,
+		children: /* @__PURE__ */ jsx("textarea", {
+			...props,
+			className: "lib-bg-transparent lib-outline-none lib-w-full lib-h-full lib-resize-none",
+			placeholder: props.placeholder,
+			ref: handleRef,
+			onChange: handleOnChange
 		})
 	});
 });
 //#endregion
-export { r as TextAreaContainer };
+export { TextAreaContainer };

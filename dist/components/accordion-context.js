@@ -1,21 +1,22 @@
-import { createContext as e, useState as t } from "react";
-import { jsx as n } from "react/jsx-runtime";
+import { createContext, useState } from "react";
+import { jsx } from "react/jsx-runtime";
 //#region src/components/accordion-context.tsx
-function r(e) {
-	let [r, a] = t(!1), o = {
+function AccordionContext(props) {
+	const [open, setOpen] = useState(false);
+	const context = {
 		setOpen: (e) => {
-			a(e);
+			setOpen(e);
 		},
-		open: r
+		open
 	};
-	return /* @__PURE__ */ n(i.Provider, {
-		value: o,
-		children: e.children
+	return /* @__PURE__ */ jsx(AccordionContextObject.Provider, {
+		value: context,
+		children: props.children
 	});
 }
-var i = e({
-	open: !1,
+var AccordionContextObject = createContext({
+	open: false,
 	setOpen: () => {}
 });
 //#endregion
-export { r as AccordionContext, i as AccordionContextObject };
+export { AccordionContext, AccordionContextObject };
