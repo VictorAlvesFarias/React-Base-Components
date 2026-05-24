@@ -2,12 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { prefixClasses } from './plugins/prefix-css'
+import dtsPlugin from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
     prefixClasses(),
     react(),
-    dts({ insertTypesEntry: true, include: ['src'] }),
+    dtsPlugin({ insertTypesEntry: true, include: ['src'] }),
   ],
   build: {
     lib: {
