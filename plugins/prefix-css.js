@@ -34,10 +34,17 @@ export function prefixClasses() {
 
                 let newCode = code
 
+                // className="classes estáticas"
                 newCode = newCode.replace(/className="([^"]+)"/g, (_, classes) => {
                     return `className="${prefixList(classes)}"`
                 })
 
+                // className='classes estáticas'  <- adicione isso
+                newCode = newCode.replace(/className='([^']+)'/g, (_, classes) => {
+                    return `className='${prefixList(classes)}'`
+                })
+
+                // className={'classes estáticas'}
                 newCode = newCode.replace(/className=\{'([^']+)'\}/g, (_, classes) => {
                     return `className={'${prefixList(classes)}'}`
                 })
