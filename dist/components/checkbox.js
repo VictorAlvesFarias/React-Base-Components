@@ -28,7 +28,7 @@ var CheckboxContainer = forwardRef((props, ref) => {
 		children: [/* @__PURE__ */ jsx("input", {
 			...props,
 			children: null,
-			className: "hidden",
+			className: "lib-hidden",
 			ref: handleRef,
 			onClick: handleOnChange
 		}), checked && props.children]
