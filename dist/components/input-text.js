@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef, useCallback, useRef } from "react";
 import { jsx } from "react/jsx-runtime";
 //#region src/components/input-text.tsx
 var TextContainer = forwardRef((props, ref) => {
@@ -49,16 +49,6 @@ var TextContainer = forwardRef((props, ref) => {
 			return "";
 		}
 	}
-	function handleRef(element) {
-		if (ref instanceof Function) ref(element);
-		if (element == null) return;
-		if (props.type == "date") element.value = formatDate(element?.value, props?.date);
-		else if (props.mask) {
-			const [regex, replacement] = props.mask;
-			element.value = formatMask(element.value, regex, replacement);
-		}
-		internalRef.current = element;
-	}
 	function handleOnChange(e) {
 		if (props.type == "date") e.target.value = formatDate(e.target.value, props?.date);
 		else if (props.mask) {
@@ -67,6 +57,17 @@ var TextContainer = forwardRef((props, ref) => {
 		}
 		props.onChange?.(e);
 	}
+	const handleRef = useCallback((element) => {
+		if (ref instanceof Function) ref(element);
+		else if (ref) ref.current = element;
+		if (element == null) return;
+		if (props.type == "date") element.value = formatDate(element?.value, props?.date);
+		else if (props.mask) {
+			const [regex, replacement] = props.mask;
+			element.value = formatMask(element.value, regex, replacement);
+		}
+		internalRef.current = element;
+	}, []);
 	return /* @__PURE__ */ jsx("div", {
 		onClick: () => internalRef.current?.focus(),
 		className: props.className,
