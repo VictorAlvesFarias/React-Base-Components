@@ -562,9 +562,6 @@ video {
 .lib-flex-col {
   flex-direction: column;
 }
-.lib-gap-3 {
-  gap: 0.75rem;
-}
 .lib-overflow-hidden {
   overflow: hidden;
 }
@@ -580,10 +577,6 @@ video {
 }
 .lib-bg-opacity-0 {
   --lib-tw-bg-opacity: 0;
-}
-.lib-py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 .lib-pr-12 {
   padding-right: 3rem;

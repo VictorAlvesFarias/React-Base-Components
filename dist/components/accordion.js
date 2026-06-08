@@ -4,29 +4,31 @@ import { jsx } from "react/jsx-runtime";
 //#region src/components/accordion.tsx
 var AccordionContainer = forwardRef((props, ref) => {
 	const { open } = useContext(AccordionContextObject);
-	const innerRef = useRef(null);
 	const [height, setHeight] = useState("0px");
+	const contentRef = useRef(null);
+	function handleRef(element) {
+		if (ref instanceof Function) ref(element);
+		else if (ref) ref.current = element;
+		contentRef.current = element;
+	}
 	useEffect(() => {
-		if (innerRef.current) if (open) {
-			const scrollHeight = innerRef.current.scrollHeight;
-			setHeight(scrollHeight + "px");
+		const el = contentRef.current;
+		if (!el) return;
+		if (open) {
+			setHeight(el.scrollHeight + "px");
 			const timeout = setTimeout(() => setHeight("auto"), 300);
 			return () => clearTimeout(timeout);
 		} else {
-			setHeight(innerRef.current.scrollHeight + "px");
+			setHeight(el.scrollHeight + "px");
 			requestAnimationFrame(() => setHeight("0px"));
 		}
 	}, [open, props.children]);
 	return /* @__PURE__ */ jsx("div", {
-		ref,
+		ref: handleRef,
 		className: `lib-overflow-hidden lib-transition-all lib-duration-300 ${props.className || ""}`,
-		style: { maxHeight: height },
-		onClick: props.onClick,
-		children: /* @__PURE__ */ jsx("div", {
-			ref: innerRef,
-			className: "lib-flex lib-flex-col lib-gap-3 lib-py-3",
-			children: props.children
-		})
+		style: { height },
+		...props,
+		children: props.children
 	});
 });
 //#endregion
