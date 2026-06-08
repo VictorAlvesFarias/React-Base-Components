@@ -1,4 +1,4 @@
-import React, { LegacyRef, Ref, forwardRef, useEffect } from "react"
+import React, { LegacyRef, Ref, forwardRef, useCallback, useEffect } from "react"
 import { useRef } from "react"
 
 interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -97,23 +97,6 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
         }
     }
 
-    function handleRef(element: HTMLInputElement | null) {
-        if (ref instanceof Function) {
-            ref(element);
-        }
-
-        if (element == null) return
-
-        if (props.type == "date") {
-            element.value = formatDate(element?.value, props?.date)
-        } else if (props.mask) {
-            const [regex, replacement] = props.mask;
-            element.value = formatMask(element.value, regex, replacement)
-        }
-
-        internalRef.current = element;
-    }
-
     function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
         if (props.type == "date") {
             e.target.value = formatDate(e.target.value, props?.date)
@@ -124,6 +107,22 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
 
         props.onChange?.(e)
     }
+
+    const handleRef = useCallback((element: HTMLInputElement | null) => {
+        if (ref instanceof Function) ref(element)
+        else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = element
+
+        if (element == null) return
+
+        if (props.type == "date") {
+            element.value = formatDate(element?.value, props?.date)
+        } else if (props.mask) {
+            const [regex, replacement] = props.mask
+            element.value = formatMask(element.value, regex, replacement)
+        }
+
+        internalRef.current = element
+    }, [])
 
     return (
         <div
