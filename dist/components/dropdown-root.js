@@ -43,7 +43,7 @@ var DropdownRootContainer = forwardRef((props, ref) => {
 		className: "lib-w-full lib-relative",
 		children: [/* @__PURE__ */ jsxs("div", {
 			"aria-disabled": props.disabled,
-			className: props.className + "lib-z-[9] lib-relative",
+			className: props.className + " lib-z-[9] lib-relative",
 			onClick: props.disabled ? () => null : onClick,
 			children: [/* @__PURE__ */ jsx("input", {
 				ref: helperInputRef,
