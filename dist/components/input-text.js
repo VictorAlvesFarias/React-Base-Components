@@ -3,7 +3,6 @@ import { jsx } from "react/jsx-runtime";
 //#region src/components/input-text.tsx
 var TextContainer = forwardRef((props, ref) => {
 	const internalRef = useRef(null);
-	const propsRef = useRef(props);
 	function parseCustomDate(dateStr, format) {
 		if (!/^(dd|mm|yyyy)([\/\-\.])(dd|mm|yyyy)\2(dd|mm|yyyy)$/.test(format)) return null;
 		const separator = format.match(/[^a-zA-Z]/)?.[0];
@@ -53,20 +52,20 @@ var TextContainer = forwardRef((props, ref) => {
 	function handleRef(element) {
 		if (ref instanceof Function) ref(element);
 		if (element == null) return;
-		if (propsRef.current.type == "date") element.value = formatDate(element?.value, props?.date);
-		else if (propsRef.current.mask) {
-			const [regex, replacement] = propsRef.current.mask;
+		if (props.type == "date") element.value = formatDate(element?.value, props?.date);
+		else if (props.mask) {
+			const [regex, replacement] = props.mask;
 			element.value = formatMask(element.value, regex, replacement);
 		}
 		internalRef.current = element;
 	}
 	function handleOnChange(e) {
-		if (propsRef.current.type == "date") e.target.value = formatDate(e.target.value, props?.date);
-		else if (propsRef.current.mask) {
-			const [regex, replacement] = propsRef.current.mask;
+		if (props.type == "date") e.target.value = formatDate(e.target.value, props?.date);
+		else if (props.mask) {
+			const [regex, replacement] = props.mask;
 			e.target.value = formatMask(e.target.value, regex, replacement);
-		} else e.target.value = e.target.value;
-		propsRef.current?.onChange && propsRef.current.onChange(e);
+		}
+		props.onChange?.(e);
 	}
 	return /* @__PURE__ */ jsx("div", {
 		onClick: () => internalRef.current?.focus(),
@@ -77,7 +76,6 @@ var TextContainer = forwardRef((props, ref) => {
 			...props,
 			type: "text",
 			className: "lib-bg-transparent lib-outline-none lib-w-full lib-h-full lib-flex",
-			placeholder: propsRef.current.placeholder,
 			ref: handleRef,
 			onChange: handleOnChange
 		})
