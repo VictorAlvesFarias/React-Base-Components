@@ -108,7 +108,7 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
         props.onChange?.(e)
     }
 
-    const handleRef = useCallback((element: HTMLInputElement | null) => {
+    function handleRef(element: HTMLInputElement | null) {
         if (ref instanceof Function) ref(element)
         else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = element
 
@@ -122,7 +122,7 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
         }
 
         internalRef.current = element
-    }, [])
+    }
 
     return (
         <div
