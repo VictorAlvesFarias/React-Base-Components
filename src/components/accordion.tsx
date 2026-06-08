@@ -4,41 +4,57 @@ import { AccordionContextObject } from './accordion-context'
 interface IAccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
-const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>((props, ref: any) => {
+const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>((props, ref) => {
     const { open } = useContext(AccordionContextObject)
-    const innerRef = useRef<HTMLDivElement>(null)
     const [height, setHeight] = useState('0px')
+    const contentRef = useRef<HTMLDivElement>(null)
+
+    // merges o ref externo com o interno
+    function handleRef(element: HTMLDivElement | null) {
+        if (ref instanceof Function) {
+            ref(element)
+        }
+
+        else if (ref) {
+            ref.current = element
+        }
+
+        contentRef.current = element
+    }
 
     useEffect(() => {
-        if (innerRef.current) {
-            if (open) {
-                const el = innerRef.current
-                const scrollHeight = el.scrollHeight
-                setHeight(scrollHeight + 'px')
-                const timeout = setTimeout(() => setHeight('auto'), 300)
-                return () => clearTimeout(timeout)
-            } else {
-                setHeight(innerRef.current.scrollHeight + 'px')
-                requestAnimationFrame(() => setHeight('0px'))
-            }
+        const el = contentRef.current
+
+        if (!el) {
+            return
+        }
+
+        if (open) {
+            setHeight(el.scrollHeight + 'px')
+
+            const timeout = setTimeout(() => setHeight('auto'), 300)
+
+            return () => clearTimeout(timeout)
+        }
+        else {
+            setHeight(el.scrollHeight + 'px')
+            requestAnimationFrame(() => setHeight('0px'))
         }
     }, [open, props.children])
 
     return (
         <div
-            ref={ref}
+            ref={handleRef}
             className={`overflow-hidden transition-all duration-300 ${props.className || ''}`}
-            style={{ maxHeight: height }}
-            onClick={props.onClick}
+            style={{ height }}
+            {...props}
         >
-            <div ref={innerRef} className="flex flex-col gap-3 py-3">
-                {props.children}
-            </div>
+            {props.children}
         </div>
     )
 })
 
-export { 
+export {
     IAccordionContainerProps,
     AccordionContainer
 }

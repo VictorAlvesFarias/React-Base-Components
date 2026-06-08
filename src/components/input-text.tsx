@@ -10,7 +10,6 @@ interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInputElement
 
 const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
     const internalRef = useRef<HTMLInputElement | null>(null);
-    const propsRef = useRef(props)
 
     function parseCustomDate(dateStr: string, format: string): Date | null {
         const formatRegex = /^(dd|mm|yyyy)([\/\-\.])(dd|mm|yyyy)\2(dd|mm|yyyy)$/;
@@ -55,6 +54,7 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
 
         return date;
     }
+
     function formatMask(initialValue: string, regex: RegExp, replacement: string) {
         let value = initialValue
 
@@ -63,6 +63,7 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
 
         return value
     }
+
     function formatDate(dateIso: string | undefined, format: string | undefined) {
         try {
             if (dateIso == null || format == null) {
@@ -95,41 +96,33 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
             return ""
         }
     }
+
     function handleRef(element: HTMLInputElement | null) {
         if (ref instanceof Function) {
             ref(element);
         }
 
-        if (element == null) {
-            return
-        }
+        if (element == null) return
 
-        if (propsRef.current.type == "date") {
+        if (props.type == "date") {
             element.value = formatDate(element?.value, props?.date)
-        }
-        else if (propsRef.current.mask) {
-            const [regex, replacement] = propsRef.current.mask;
-
+        } else if (props.mask) {
+            const [regex, replacement] = props.mask;
             element.value = formatMask(element.value, regex, replacement)
-
         }
 
         internalRef.current = element;
-    };
-    function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
-        if (propsRef.current.type == "date") {
-            e.target.value = formatDate(e.target.value, props?.date)
-        }
-        else if (propsRef.current.mask) {
-            const [regex, replacement] = propsRef.current.mask;
+    }
 
+    function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
+        if (props.type == "date") {
+            e.target.value = formatDate(e.target.value, props?.date)
+        } else if (props.mask) {
+            const [regex, replacement] = props.mask;
             e.target.value = formatMask(e.target.value, regex, replacement)
         }
-        else {
-            e.target.value = e.target.value
-        }
 
-        propsRef.current?.onChange ? propsRef.current.onChange(e) : null
+        props.onChange?.(e)
     }
 
     return (
@@ -142,8 +135,7 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
             <input
                 {...props}
                 type="text"
-                className="bg-transparent outline-none w-full h-full flex "
-                placeholder={propsRef.current.placeholder}
+                className="bg-transparent outline-none w-full h-full flex"
                 ref={handleRef}
                 onChange={handleOnChange}
             />
