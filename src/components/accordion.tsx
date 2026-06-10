@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AccordionContextObject } from './accordion-context'
 
 interface IAccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -6,48 +6,46 @@ interface IAccordionContainerProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const AccordionContainer = forwardRef<HTMLDivElement, IAccordionContainerProps>((props, ref) => {
     const { open } = useContext(AccordionContextObject)
-    const [height, setHeight] = useState('0px')
-    const contentRef = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [height, setHeight] = useState<number | 'auto'>(0)
 
-    // merges o ref externo com o interno
-    function handleRef(element: HTMLDivElement | null) {
-        if (ref instanceof Function) {
-            ref(element)
-        }
+    useLayoutEffect(() => {
+        const el = containerRef.current
 
-        else if (ref) {
-            ref.current = element
-        }
-
-        contentRef.current = element
-    }
-
-    useEffect(() => {
-        const el = contentRef.current
-
-        if (!el) {
-            return
-        }
+        if (!el) return
 
         if (open) {
-            setHeight(el.scrollHeight + 'px')
+            setHeight(el.scrollHeight)
 
-            const timeout = setTimeout(() => setHeight('auto'), 300)
+            const handleTransitionEnd = () => {
+                setHeight('auto')
+            }
 
-            return () => clearTimeout(timeout)
+            el.addEventListener('transitionend', handleTransitionEnd, { once: true })
+
+            return () => {
+                el.removeEventListener('transitionend', handleTransitionEnd)
+            }
         }
-        else {
-            setHeight(el.scrollHeight + 'px')
-            requestAnimationFrame(() => setHeight('0px'))
+
+        if (height === 'auto') {
+            setHeight(el.scrollHeight)
+
+            requestAnimationFrame(() => {
+                setHeight(0)
+            })
+        } else {
+            setHeight(0)
         }
-    }, [open, props.children])
+    }, [open])
 
     return (
         <div
-            ref={handleRef}
+            ref={containerRef}
+            style={{
+                height: height === 'auto' ? 'auto' : `${height}px`
+            }}
             className={`overflow-hidden transition-all duration-300 ${props.className || ''}`}
-            style={{ height }}
-            {...props}
         >
             {props.children}
         </div>
