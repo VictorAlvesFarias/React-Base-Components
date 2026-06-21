@@ -1,11 +1,11 @@
 import React, { LegacyRef, Ref, forwardRef, useEffect, useRef, useState } from "react"
 
-interface ICheckboxContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface ICheckboxContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     onChange?: (e: any, i?: any) => any
     data: any
 }
 
-const CheckboxContainer = forwardRef((props: ICheckboxContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
+export const CheckboxContainer = forwardRef((props: ICheckboxContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
     const internalRef = useRef<HTMLInputElement | null>(null);
     const [checked, setChecked] = useState(false)
 
@@ -54,8 +54,3 @@ const CheckboxContainer = forwardRef((props: ICheckboxContainerProps, ref: Ref<H
         </label>
     )
 })
-
-export {
-    ICheckboxContainerProps,
-    CheckboxContainer
-}

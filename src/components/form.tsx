@@ -1,9 +1,10 @@
 import React, { FormEvent, forwardRef, LegacyRef, Ref, useRef } from 'react'
-interface IFormContainerProps extends React.FormHTMLAttributes<HTMLFormElement> {
+
+export interface IFormContainerProps extends React.FormHTMLAttributes<HTMLFormElement> {
     onSubmit: (e: any) => any
 }
 
-const FormContainer = forwardRef((props: IFormContainerProps, ref:  Ref<HTMLFormElement> | LegacyRef<HTMLFormElement>) => {
+export const FormContainer = forwardRef((props: IFormContainerProps, ref:  Ref<HTMLFormElement> | LegacyRef<HTMLFormElement>) => {
     const internalRef = useRef<HTMLFormElement | null>(null);
 
     function handleRef(element: HTMLFormElement | null) {
@@ -26,8 +27,3 @@ const FormContainer = forwardRef((props: IFormContainerProps, ref:  Ref<HTMLForm
         </form>
     )
 })
-
-export {
-    IFormContainerProps,
-    FormContainer
-}

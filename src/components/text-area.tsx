@@ -1,12 +1,12 @@
 import React, { LegacyRef, Ref, forwardRef } from "react";
 import { useRef } from "react";
 
-interface ITextAreaContainerProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface ITextAreaContainerProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     mask?: [RegExp, string]
     loading?: boolean
 }
 
-const TextAreaContainer = forwardRef((props: ITextAreaContainerProps, ref: Ref<HTMLTextAreaElement> | LegacyRef<HTMLTextAreaElement>) => {
+export const TextAreaContainer = forwardRef((props: ITextAreaContainerProps, ref: Ref<HTMLTextAreaElement> | LegacyRef<HTMLTextAreaElement>) => {
     const internalRef = useRef<HTMLTextAreaElement | null>(null);
 
     function handleRef(element: HTMLTextAreaElement | null) {
@@ -38,8 +38,3 @@ const TextAreaContainer = forwardRef((props: ITextAreaContainerProps, ref: Ref<H
         </div>
     );
 });
-
-export {
-    ITextAreaContainerProps,
-    TextAreaContainer
-}

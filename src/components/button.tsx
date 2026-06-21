@@ -1,11 +1,11 @@
 import React, { LegacyRef, forwardRef } from 'react';
 
-interface IButtonContainerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButtonContainerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean
   loadingComponent?: React.ReactNode
 }
 
-const ButtonContainer = forwardRef<LegacyRef<HTMLButtonElement> | any, IButtonContainerProps>((_, ref?) => {
+export const ButtonContainer = forwardRef<LegacyRef<HTMLButtonElement> | any, IButtonContainerProps>((_, ref?) => {
   return (
     <button
       ref={ref}
@@ -20,8 +20,3 @@ const ButtonContainer = forwardRef<LegacyRef<HTMLButtonElement> | any, IButtonCo
     </button>
   );
 })
-
-export {
-  IButtonContainerProps,
-  ButtonContainer
-}

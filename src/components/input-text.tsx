@@ -1,14 +1,14 @@
 import React, { LegacyRef, Ref, forwardRef, useCallback, useEffect } from "react"
 import { useRef } from "react"
 
-interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInputElement> {
     mask?: [RegExp, string]
     date?: string
     loading?: boolean
     debug?: boolean
 }
 
-const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
+export const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
     const internalRef = useRef<HTMLInputElement | null>(null);
 
     function parseCustomDate(dateStr: string, format: string): Date | null {
@@ -141,8 +141,3 @@ const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInput
         </div>
     )
 })
-
-export {
-    ITextContainerProps,
-    TextContainer
-}

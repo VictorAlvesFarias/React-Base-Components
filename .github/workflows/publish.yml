@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -28,19 +29,23 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Atualizar versão
+        run: npm version patch --no-git-tag-version
+
       - name: Gerar build
         run: npm run build
 
-      - name: Commit dist
+      - name: Commit dist e versionamento
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
           git add -f dist
+          git add package.json package-lock.json
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Dist updated"
+            git commit -m "Build atualizado [skip ci]"
             git push origin HEAD:main
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
