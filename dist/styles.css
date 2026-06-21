@@ -499,9 +499,6 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
-.lib-visible {
-  visibility: visible;
-}
 .lib-fixed {
   position: fixed;
 }
