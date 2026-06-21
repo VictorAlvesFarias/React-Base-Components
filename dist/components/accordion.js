@@ -1,33 +1,35 @@
 import { AccordionContextObject } from "./accordion-context.js";
-import { forwardRef, useContext, useEffect, useRef, useState } from "react";
+import { forwardRef, useContext, useLayoutEffect, useRef, useState } from "react";
 import { jsx } from "react/jsx-runtime";
 //#region src/components/accordion.tsx
 var AccordionContainer = forwardRef((props, ref) => {
 	const { open } = useContext(AccordionContextObject);
-	const [height, setHeight] = useState("0px");
-	const contentRef = useRef(null);
-	function handleRef(element) {
-		if (ref instanceof Function) ref(element);
-		else if (ref) ref.current = element;
-		contentRef.current = element;
-	}
-	useEffect(() => {
-		const el = contentRef.current;
+	const containerRef = useRef(null);
+	const [height, setHeight] = useState(0);
+	useLayoutEffect(() => {
+		const el = containerRef.current;
 		if (!el) return;
 		if (open) {
-			setHeight(el.scrollHeight + "px");
-			const timeout = setTimeout(() => setHeight("auto"), 300);
-			return () => clearTimeout(timeout);
-		} else {
-			setHeight(el.scrollHeight + "px");
-			requestAnimationFrame(() => setHeight("0px"));
+			setHeight(el.scrollHeight);
+			const handleTransitionEnd = () => {
+				setHeight("auto");
+			};
+			el.addEventListener("transitionend", handleTransitionEnd, { once: true });
+			return () => {
+				el.removeEventListener("transitionend", handleTransitionEnd);
+			};
 		}
-	}, [open, props.children]);
+		if (height === "auto") {
+			setHeight(el.scrollHeight);
+			requestAnimationFrame(() => {
+				setHeight(0);
+			});
+		} else setHeight(0);
+	}, [open]);
 	return /* @__PURE__ */ jsx("div", {
-		ref: handleRef,
+		ref: containerRef,
+		style: { height: height === "auto" ? "auto" : `${height}px` },
 		className: `lib-overflow-hidden lib-transition-all lib-duration-300 ${props.className || ""}`,
-		style: { height },
-		...props,
 		children: props.children
 	});
 });
