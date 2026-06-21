@@ -1,4 +1,3 @@
-
 function prefixList(classes) {
     return classes
         .split(/\s+/)
@@ -22,79 +21,142 @@ function prefixList(classes) {
         .join(' ')
 }
 
+function findClosingBrace(code, openIdx) {
+    let depth = 0
+
+    for (let i = openIdx; i < code.length; i++) {
+        if (code[i] === '{') {
+            depth++
+        }
+        else if (code[i] === '}') {
+            depth--
+
+            if (depth === 0) {
+                return i
+            }
+        }
+    }
+
+    return -1
+}
+
+function prefixInsideBraces(expr) {
+    expr = expr.replace(/'([^']+)'/g, (_, classes) => {
+        return `'${prefixList(classes)}'`
+    })
+
+    expr = expr.replace(/"([^"]+)"/g, (_, classes) => {
+        return `"${prefixList(classes)}"`
+    })
+
+    return expr
+}
+
 export function prefixClasses() {
     return {
         name: 'prefix-classes',
         enforce: 'pre',
         transform(code, id) {
-            if (!id.includes('node_modules') && /\.(ts|tsx|js|jsx)$/.test(id)) {
-                if (!code.includes('className')) {
-                    return null
+            if (id.includes('node_modules') || !/\.(ts|tsx|js|jsx)$/.test(id)) {
+                return null
+            }
+
+            if (!code.includes('className')) {
+                return null
+            }
+
+            let result = ''
+            let i = 0
+
+            while (i < code.length) {
+                const classNameIdx = code.indexOf('className=', i)
+
+                if (classNameIdx === -1) {
+                    result += code.slice(i)
+                    break
                 }
 
-                let newCode = code
+                result += code.slice(i, classNameIdx)
+                result += 'className='
+                i = classNameIdx + 'className='.length
 
-                // className="classes estáticas"
-                newCode = newCode.replace(/className="([^"]+)"/g, (_, classes) => {
-                    return `className="${prefixList(classes)}"`
-                })
+                const next = code[i]
 
-                // className='classes estáticas'  <- adicione isso
-                newCode = newCode.replace(/className='([^']+)'/g, (_, classes) => {
-                    return `className='${prefixList(classes)}'`
-                })
+                if (next === '"') {
+                    const end = code.indexOf('"', i + 1)
 
-                // className={'classes estáticas'}
-                newCode = newCode.replace(/className=\{'([^']+)'\}/g, (_, classes) => {
-                    return `className={'${prefixList(classes)}'}`
-                })
+                    if (end === -1) {
+                        result += code.slice(i)
+                        break
+                    }
 
-                // className={expressao + 'classes estáticas'} ou className={'classes estáticas' + expressao}
-                newCode = newCode.replace(/className=\{([^}]*?)'([^']+)'([^}]*?)\}/g, (_, before, classes, after) => {
-                    const prefixed = prefixList(classes.trim())
-                    const hasBeforeExpr = before.trim().length > 0
-                    const hasAfterExpr = after.trim().length > 0
-                    const spaced = `${hasBeforeExpr ? ' ' : ''}${prefixed}${hasAfterExpr ? ' ' : ''}`
-                    return `className={${before}'${spaced}'${after}}`
-                })
+                    const classes = code.slice(i + 1, end)
+                    result += `"${prefixList(classes)}"`
+                    i = end + 1
+                }
+                else if (next === "'") {
+                    const end = code.indexOf("'", i + 1)
 
-                // Mesma coisa com aspas duplas dentro do {}
-                newCode = newCode.replace(/className=\{([^}]*?)"([^"]+)"([^}]*?)\}/g, (_, before, classes, after) => {
-                    const prefixed = prefixList(classes.trim())
-                    const hasBeforeExpr = before.trim().length > 0
-                    const hasAfterExpr = after.trim().length > 0
-                    const spaced = `${hasBeforeExpr ? ' ' : ''}${prefixed}${hasAfterExpr ? ' ' : ''}`
-                    return `className={${before}"${spaced}"${after}}`
-                })
+                    if (end === -1) {
+                        result += code.slice(i)
+                        break
+                    }
 
-                newCode = newCode.replace(/className=\{`([^`]+)`\}/g, (_, content) => {
-                    const prefixed = content.replace(/([^${}]+)|\$\{[^}]*\}/g, (segment) => {
-                        if (segment.startsWith('${')) {
-                            return segment
-                        }
+                    const classes = code.slice(i + 1, end)
+                    result += `'${prefixList(classes)}'`
+                    i = end + 1
+                }
+                else if (next === '{') {
+                    const closeIdx = findClosingBrace(code, i)
 
-                        return segment.replace(/(\S+)/g, (cls) => {
-                            const match = cls.match(/^((?:[a-zA-Z0-9_-]+:)*)(.+)$/)
-                            if (!match) {
-                                return cls
+                    if (closeIdx === -1) {
+                        result += code.slice(i)
+                        break
+                    }
+
+                    const inner = code.slice(i + 1, closeIdx)
+
+                    if (inner.startsWith('`') && inner.endsWith('`')) {
+                        const tplContent = inner.slice(1, -1)
+
+                        const prefixed = tplContent.replace(/([^${}]+)|\$\{[^}]*\}/g, (segment) => {
+                            if (segment.startsWith('${')) {
+                                return segment
                             }
 
-                            const variant = match[1]
-                            const className = match[2]
+                            return segment.replace(/(\S+)/g, (cls) => {
+                                const match = cls.match(/^((?:[a-zA-Z0-9_-]+:)*)(.+)$/)
 
-                            if (className.startsWith('lib-')) {
-                                return cls
-                            }
+                                if (!match) {
+                                    return cls
+                                }
 
-                            return `${variant}lib-${className}`
+                                const variant = match[1]
+                                const className = match[2]
+
+                                if (className.startsWith('lib-')) {
+                                    return cls
+                                }
+
+                                return `${variant}lib-${className}`
+                            })
                         })
-                    })
-                    return `className={\`${prefixed}\`}`
-                })
 
-                return { code: newCode, map: null }
+                        result += `{\`${prefixed}\`}`
+                    }
+                    else {
+                        result += `{${prefixInsideBraces(inner)}}`
+                    }
+
+                    i = closeIdx + 1
+                }
+                else {
+                    result += next
+                    i++
+                }
             }
-            return null
+
+            return result !== code ? { code: result, map: null } : null
         }
     }
 }
