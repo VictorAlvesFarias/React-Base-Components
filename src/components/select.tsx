@@ -53,7 +53,7 @@ export const SelectContextObject = createContext<SelectContextType>({
 
 export const SelectRootContainer = forwardRef<HTMLInputElement, ISelectRootContainerProps>(
     (props, ref) => {
-        const { open, setOpen, selected, setSelected, filter, setFilter, setStarted, options } =
+        const { open, setOpen, selected, setSelected, filter, setFilter, setStarted } =
             useContext(SelectContextObject)
 
         const internalRef = useRef<HTMLInputElement | null>(null)
@@ -81,14 +81,18 @@ export const SelectRootContainer = forwardRef<HTMLInputElement, ISelectRootConta
             helperInputRef.current?.focus()
         }
 
+        // FIX 1: Só chama setStarted se houver um valor real, para não
+        // sobrescrever null com "" e quebrar a detecção no SelectMenuContainer.
         useEffect(() => {
-            setStarted(inputProps.value?.toString() ?? '')
+            if (inputProps.value != null && inputProps.value !== '') {
+                setStarted(inputProps.value.toString())
+            }
         }, [])
 
-        useEffect(() => {
-            const option = options.find((e) => e.value === internalRef.current?.value)
-            setSelected(option ? { label: option.label, value: option.value } : null)
-        }, [internalRef.current?.value])
+        // FIX 2: Removido o useEffect com internalRef.current?.value como
+        // dependência — refs não são reativas e nunca re-trigavam esse effect.
+        // A seleção inicial agora é feita exclusivamente pelo fluxo
+        // setStarted → SelectMenuContainer, igual ao dropdown original.
 
         return (
             <>
@@ -202,14 +206,18 @@ export function SelectMenuContainer(props: ISelectMenuContainerProps) {
     const { filter, started, setSelected } = useContext(SelectContextObject)
     const items = Array.isArray(props.children) ? props.children : [props.children]
 
+    // FIX 3: Adicionado items.length como dependência para resolver o race
+    // condition onde setStarted disparava antes das options serem registradas.
+    // Quando a última option monta e items.length muda, o effect re-executa
+    // com a lista completa e encontra o match corretamente.
     useEffect(() => {
-        if (started != null) {
+        if (started != null && started !== '') {
             const match = items.find((e) => e.props.value === started)
             if (match) {
                 setSelected({ value: started, label: match.props.label })
             }
         }
-    }, [started])
+    }, [started, items.length])
 
     return (
         <div className={`w-full flex flex-col ${props.className ?? ''}`}>
