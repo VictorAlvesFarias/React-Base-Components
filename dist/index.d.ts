@@ -8,3 +8,5 @@ export * from './components/text-area';
 export * from './components/if';
 export * from './components/modal';
 export * from './components/sidebar';
+export * from './components/toogle-group';
+export * from './components/button-toogle';
