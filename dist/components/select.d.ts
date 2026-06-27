@@ -20,12 +20,12 @@ export interface SelectContextType {
     setOpen: (value: boolean) => void;
     filter: string;
     setFilter: (value: string) => void;
-    started: string | null;
-    setStarted: (value: string) => void;
     selected: ISelectOptionValue | null;
     setSelected: (value: ISelectOptionValue | null) => void;
     options: ISelectOptionValue[];
     setOption: (value: ISelectOptionValue) => void;
+    externalValue: any;
+    setExternalValue: (value: any) => void;
 }
 export interface SelectContextComponent {
     children: React.ReactNode;
