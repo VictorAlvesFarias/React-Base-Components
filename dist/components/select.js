@@ -36,8 +36,8 @@ var SelectRootContainer = forwardRef((props, ref) => {
 		helperInputRef.current?.focus();
 	}
 	useEffect(() => {
-		setExternalValue(inputProps.value ?? null);
-	}, [inputProps.value]);
+		setExternalValue(props.value ?? null);
+	}, [props.value]);
 	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsxs("div", {
 		className: "lib-w-full lib-relative",
 		children: [/* @__PURE__ */ jsxs("div", {
@@ -139,9 +139,9 @@ function SelectMenuContainer(props) {
 	const items = Array.isArray(props.children) ? props.children : [props.children];
 	useEffect(() => {
 		if (externalValue != null && externalValue !== "") {
-			const match = items.find((e) => e.props.value === externalValue);
+			const match = items.find((e) => String(e.props.value) === String(externalValue));
 			if (match) setSelected({
-				value: externalValue,
+				value: match.props.value,
 				label: match.props.label
 			});
 		} else setSelected(null);
