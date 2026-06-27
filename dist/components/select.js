@@ -138,8 +138,14 @@ function SelectMenuContainer(props) {
 	const { filter, externalValue, setSelected } = useContext(SelectContextObject);
 	const items = Array.isArray(props.children) ? props.children : [props.children];
 	useEffect(() => {
+		console.log("effect triggered", {
+			externalValue,
+			itemsLength: items.length,
+			items: items.map((e) => e.props.value)
+		});
 		if (externalValue != null && externalValue !== "") {
 			const match = items.find((e) => String(e.props.value) === String(externalValue));
+			console.log("match:", match);
 			if (match) setSelected({
 				value: match.props.value,
 				label: match.props.label
