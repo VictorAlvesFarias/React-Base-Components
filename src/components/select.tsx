@@ -25,12 +25,13 @@ export interface SelectContextType {
     setOpen: (value: boolean) => void
     filter: string
     setFilter: (value: string) => void
-    started: string | null
-    setStarted: (value: string) => void
     selected: ISelectOptionValue | null
     setSelected: (value: ISelectOptionValue | null) => void
     options: ISelectOptionValue[]
     setOption: (value: ISelectOptionValue) => void
+    // Substitui "started" — reage a mudanças externas (ex: RHF reset/setValue)
+    externalValue: any
+    setExternalValue: (value: any) => void
 }
 
 export interface SelectContextComponent {
@@ -43,17 +44,17 @@ export const SelectContextObject = createContext<SelectContextType>({
     setOpen: () => { },
     filter: '',
     setFilter: () => { },
-    started: null,
-    setStarted: () => { },
     selected: null,
     setSelected: () => { },
     options: [],
     setOption: () => { },
+    externalValue: null,
+    setExternalValue: () => { },
 })
 
 export const SelectRootContainer = forwardRef<HTMLInputElement, ISelectRootContainerProps>(
     (props, ref) => {
-        const { open, setOpen, selected, setSelected, filter, setFilter, setStarted } =
+        const { open, setOpen, selected, setSelected, filter, setFilter, setExternalValue } =
             useContext(SelectContextObject)
 
         const internalRef = useRef<HTMLInputElement | null>(null)
@@ -81,18 +82,11 @@ export const SelectRootContainer = forwardRef<HTMLInputElement, ISelectRootConta
             helperInputRef.current?.focus()
         }
 
-        // FIX 1: Só chama setStarted se houver um valor real, para não
-        // sobrescrever null com "" e quebrar a detecção no SelectMenuContainer.
+        // Reage a qualquer mudança de value — cobre mount síncrono E
+        // atribuições assíncronas via RHF reset() / setValue()
         useEffect(() => {
-            if (inputProps.value != null && inputProps.value !== '') {
-                setStarted(inputProps.value.toString())
-            }
-        }, [])
-
-        // FIX 2: Removido o useEffect com internalRef.current?.value como
-        // dependência — refs não são reativas e nunca re-trigavam esse effect.
-        // A seleção inicial agora é feita exclusivamente pelo fluxo
-        // setStarted → SelectMenuContainer, igual ao dropdown original.
+            setExternalValue(inputProps.value ?? null)
+        }, [inputProps.value])
 
         return (
             <>
@@ -139,10 +133,10 @@ export const SelectRootContainer = forwardRef<HTMLInputElement, ISelectRootConta
 
 export function SelectContext({ children, onChange }: SelectContextComponent) {
     const [open, setOpen] = useState(false)
-    const [started, setStarted] = useState<string | null>(null)
     const [selected, setSelected] = useState<ISelectOptionValue | null>(null)
     const [filter, setFilter] = useState('')
     const [options, setOptions] = useState<ISelectOptionValue[]>([])
+    const [externalValue, setExternalValue] = useState<any>(null)
 
     function handleSetSelected(value: ISelectOptionValue | null) {
         onChange?.(value?.value)
@@ -160,12 +154,12 @@ export function SelectContext({ children, onChange }: SelectContextComponent) {
                 setOpen,
                 filter,
                 setFilter,
-                started,
-                setStarted,
                 selected,
                 setSelected: handleSetSelected,
                 options,
                 setOption: handleAddOption,
+                externalValue,
+                setExternalValue,
             }}
         >
             {children}
@@ -203,21 +197,21 @@ export function SelectOptionContainer(props: ISelectOptionContainerProps) {
 }
 
 export function SelectMenuContainer(props: ISelectMenuContainerProps) {
-    const { filter, started, setSelected } = useContext(SelectContextObject)
+    const { filter, externalValue, setSelected } = useContext(SelectContextObject)
     const items = Array.isArray(props.children) ? props.children : [props.children]
 
-    // FIX 3: Adicionado items.length como dependência para resolver o race
-    // condition onde setStarted disparava antes das options serem registradas.
-    // Quando a última option monta e items.length muda, o effect re-executa
-    // com a lista completa e encontra o match corretamente.
+    // Reage ao externalValue (vindo do RHF) E ao items.length (race condition
+    // onde as options ainda não tinham montado quando o value chegou)
     useEffect(() => {
-        if (started != null && started !== '') {
-            const match = items.find((e) => e.props.value === started)
+        if (externalValue != null && externalValue !== '') {
+            const match = items.find((e) => e.props.value === externalValue)
             if (match) {
-                setSelected({ value: started, label: match.props.label })
+                setSelected({ value: externalValue, label: match.props.label })
             }
+        } else {
+            setSelected(null)
         }
-    }, [started, items.length])
+    }, [externalValue, items.length])
 
     return (
         <div className={`w-full flex flex-col ${props.className ?? ''}`}>
