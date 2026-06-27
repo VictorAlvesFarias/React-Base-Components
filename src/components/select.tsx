@@ -29,7 +29,6 @@ export interface SelectContextType {
     setSelected: (value: ISelectOptionValue | null) => void
     options: ISelectOptionValue[]
     setOption: (value: ISelectOptionValue) => void
-    // Substitui "started" — reage a mudanças externas (ex: RHF reset/setValue)
     externalValue: any
     setExternalValue: (value: any) => void
 }
@@ -82,11 +81,12 @@ export const SelectRootContainer = forwardRef<HTMLInputElement, ISelectRootConta
             helperInputRef.current?.focus()
         }
 
-        // Reage a qualquer mudança de value — cobre mount síncrono E
-        // atribuições assíncronas via RHF reset() / setValue()
+        // Lê direto de props.value (não de inputProps) para evitar que o
+        // HTMLInputElement serialize o número como string antes de chegar aqui.
+        // Assim o valor original (ex: number 3) chega intacto ao contexto.
         useEffect(() => {
-            setExternalValue(inputProps.value ?? null)
-        }, [inputProps.value])
+            setExternalValue(props.value ?? null)
+        }, [props.value])
 
         return (
             <>
@@ -200,13 +200,14 @@ export function SelectMenuContainer(props: ISelectMenuContainerProps) {
     const { filter, externalValue, setSelected } = useContext(SelectContextObject)
     const items = Array.isArray(props.children) ? props.children : [props.children]
 
-    // Reage ao externalValue (vindo do RHF) E ao items.length (race condition
-    // onde as options ainda não tinham montado quando o value chegou)
     useEffect(() => {
         if (externalValue != null && externalValue !== '') {
-            const match = items.find((e) => e.props.value === externalValue)
+            // Compara como string para neutralizar a diferença entre
+            // number (vindo da prop original) e string (serializado pelo RHF/HTML).
+            // Ex: e.props.value = 3, externalValue = "3" → ambos viram "3" ✓
+            const match = items.find((e) => String(e.props.value) === String(externalValue))
             if (match) {
-                setSelected({ value: externalValue, label: match.props.label })
+                setSelected({ value: match.props.value, label: match.props.label })
             }
         } else {
             setSelected(null)
