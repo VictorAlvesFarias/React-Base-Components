@@ -14,7 +14,7 @@ var SelectContextObject = createContext({
 	setOption: () => {}
 });
 var SelectRootContainer = forwardRef((props, ref) => {
-	const { open, setOpen, selected, setSelected, filter, setFilter, setStarted, options } = useContext(SelectContextObject);
+	const { open, setOpen, selected, setSelected, filter, setFilter, setStarted } = useContext(SelectContextObject);
 	const internalRef = useRef(null);
 	const helperInputRef = useRef(null);
 	const { children, ...inputProps } = props;
@@ -36,15 +36,8 @@ var SelectRootContainer = forwardRef((props, ref) => {
 		helperInputRef.current?.focus();
 	}
 	useEffect(() => {
-		setStarted(inputProps.value?.toString() ?? "");
+		if (inputProps.value != null && inputProps.value !== "") setStarted(inputProps.value.toString());
 	}, []);
-	useEffect(() => {
-		const option = options.find((e) => e.value === internalRef.current?.value);
-		setSelected(option ? {
-			label: option.label,
-			value: option.value
-		} : null);
-	}, [internalRef.current?.value]);
 	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsxs("div", {
 		className: "lib-w-full lib-relative",
 		children: [/* @__PURE__ */ jsxs("div", {
@@ -145,14 +138,14 @@ function SelectMenuContainer(props) {
 	const { filter, started, setSelected } = useContext(SelectContextObject);
 	const items = Array.isArray(props.children) ? props.children : [props.children];
 	useEffect(() => {
-		if (started != null) {
+		if (started != null && started !== "") {
 			const match = items.find((e) => e.props.value === started);
 			if (match) setSelected({
 				value: started,
 				label: match.props.label
 			});
 		}
-	}, [started]);
+	}, [started, items.length]);
 	return /* @__PURE__ */ jsx("div", {
 		className: `lib-w-full lib-flex lib-flex-col ${props.className ?? ""}`,
 		children: items.filter((e) => e.props.label.toLowerCase().includes(filter.toLowerCase()))
