@@ -201,14 +201,12 @@ export function SelectMenuContainer(props: ISelectMenuContainerProps) {
     const items = Array.isArray(props.children) ? props.children : [props.children]
 
     useEffect(() => {
+        console.log("effect triggered", { externalValue, itemsLength: items.length, items: items.map(e => e.props.value) })
+
         if (externalValue != null && externalValue !== '') {
-            // Compara como string para neutralizar a diferença entre
-            // number (vindo da prop original) e string (serializado pelo RHF/HTML).
-            // Ex: e.props.value = 3, externalValue = "3" → ambos viram "3" ✓
             const match = items.find((e) => String(e.props.value) === String(externalValue))
-            if (match) {
-                setSelected({ value: match.props.value, label: match.props.label })
-            }
+            console.log("match:", match)
+            if (match) setSelected({ value: match.props.value, label: match.props.label })
         } else {
             setSelected(null)
         }
