@@ -6,15 +6,15 @@ var SelectContextObject = createContext({
 	setOpen: () => {},
 	filter: "",
 	setFilter: () => {},
-	started: null,
-	setStarted: () => {},
 	selected: null,
 	setSelected: () => {},
 	options: [],
-	setOption: () => {}
+	setOption: () => {},
+	externalValue: null,
+	setExternalValue: () => {}
 });
 var SelectRootContainer = forwardRef((props, ref) => {
-	const { open, setOpen, selected, setSelected, filter, setFilter, setStarted } = useContext(SelectContextObject);
+	const { open, setOpen, selected, setSelected, filter, setFilter, setExternalValue } = useContext(SelectContextObject);
 	const internalRef = useRef(null);
 	const helperInputRef = useRef(null);
 	const { children, ...inputProps } = props;
@@ -36,8 +36,8 @@ var SelectRootContainer = forwardRef((props, ref) => {
 		helperInputRef.current?.focus();
 	}
 	useEffect(() => {
-		if (inputProps.value != null && inputProps.value !== "") setStarted(inputProps.value.toString());
-	}, []);
+		setExternalValue(inputProps.value ?? null);
+	}, [inputProps.value]);
 	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsxs("div", {
 		className: "lib-w-full lib-relative",
 		children: [/* @__PURE__ */ jsxs("div", {
@@ -74,10 +74,10 @@ var SelectRootContainer = forwardRef((props, ref) => {
 });
 function SelectContext({ children, onChange }) {
 	const [open, setOpen] = useState(false);
-	const [started, setStarted] = useState(null);
 	const [selected, setSelected] = useState(null);
 	const [filter, setFilter] = useState("");
 	const [options, setOptions] = useState([]);
+	const [externalValue, setExternalValue] = useState(null);
 	function handleSetSelected(value) {
 		onChange?.(value?.value);
 		setSelected(value);
@@ -91,12 +91,12 @@ function SelectContext({ children, onChange }) {
 			setOpen,
 			filter,
 			setFilter,
-			started,
-			setStarted,
 			selected,
 			setSelected: handleSetSelected,
 			options,
-			setOption: handleAddOption
+			setOption: handleAddOption,
+			externalValue,
+			setExternalValue
 		},
 		children
 	});
@@ -135,17 +135,17 @@ function SelectOptionContainer(props) {
 	});
 }
 function SelectMenuContainer(props) {
-	const { filter, started, setSelected } = useContext(SelectContextObject);
+	const { filter, externalValue, setSelected } = useContext(SelectContextObject);
 	const items = Array.isArray(props.children) ? props.children : [props.children];
 	useEffect(() => {
-		if (started != null && started !== "") {
-			const match = items.find((e) => e.props.value === started);
+		if (externalValue != null && externalValue !== "") {
+			const match = items.find((e) => e.props.value === externalValue);
 			if (match) setSelected({
-				value: started,
+				value: externalValue,
 				label: match.props.label
 			});
-		}
-	}, [started, items.length]);
+		} else setSelected(null);
+	}, [externalValue, items.length]);
 	return /* @__PURE__ */ jsx("div", {
 		className: `lib-w-full lib-flex lib-flex-col ${props.className ?? ""}`,
 		children: items.filter((e) => e.props.label.toLowerCase().includes(filter.toLowerCase()))
