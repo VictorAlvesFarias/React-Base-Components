@@ -4,5 +4,6 @@ export interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInput
     date?: string;
     loading?: boolean;
     debug?: boolean;
+    error?: string;
 }
 export declare const TextContainer: React.ForwardRefExoticComponent<ITextContainerProps & React.RefAttributes<HTMLInputElement>>;

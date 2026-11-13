@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from "react";
-import { jsx } from "react/jsx-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/components/input-text.tsx
 var TextContainer = forwardRef((props, ref) => {
 	const internalRef = useRef(null);
@@ -68,18 +68,21 @@ var TextContainer = forwardRef((props, ref) => {
 		}
 		internalRef.current = element;
 	}
-	return /* @__PURE__ */ jsx("div", {
+	return /* @__PURE__ */ jsxs("div", {
 		onClick: () => internalRef.current?.focus(),
 		className: props.className,
 		"aria-disabled": props.disabled,
 		"aria-atomic": props.loading,
-		children: /* @__PURE__ */ jsx("input", {
+		children: [/* @__PURE__ */ jsx("input", {
 			...props,
 			type: "text",
 			className: "lib-bg-transparent lib-outline-none lib-w-full lib-h-full lib-flex",
 			ref: handleRef,
 			onChange: handleOnChange
-		})
+		}), props.error && /* @__PURE__ */ jsx("span", {
+			className: "lib-text-red-500 lib-text-sm",
+			children: props.error
+		})]
 	});
 });
 //#endregion

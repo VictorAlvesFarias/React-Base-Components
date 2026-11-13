@@ -578,6 +578,14 @@ video {
 .lib-pr-12 {
   padding-right: 3rem;
 }
+.lib-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.lib-text-red-500 {
+  --lib-tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--lib-tw-text-opacity, 1));
+}
 .lib-outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
