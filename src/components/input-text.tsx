@@ -6,6 +6,7 @@ export interface ITextContainerProps extends React.InputHTMLAttributes<HTMLInput
     date?: string
     loading?: boolean
     debug?: boolean
+    error?: string
 }
 
 export const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HTMLInputElement> | LegacyRef<HTMLInputElement>) => {
@@ -138,6 +139,7 @@ export const TextContainer = forwardRef((props: ITextContainerProps, ref: Ref<HT
                 ref={handleRef}
                 onChange={handleOnChange}
             />
+            {props.error && <span className="text-red-500 text-sm">{props.error}</span>}
         </div>
     )
 })
